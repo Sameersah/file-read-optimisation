@@ -5,6 +5,7 @@
 #include "CrashDataProcessor.h"
 
 void CrashDataProcessor::loadData(const std::string& filename) {
+    auto start = std::chrono::high_resolution_clock::now();
     std::ifstream file(filename);
     if (!file.is_open()) {
         std::cerr << "Error: Unable to open file " << filename << std::endl;
@@ -72,6 +73,10 @@ void CrashDataProcessor::loadData(const std::string& filename) {
     }
     file.close();
     std::cout << "Data successfully loaded. Total records: " << records.size() << std::endl;
+
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = end - start;
+    std::cout << "Data Load Time: " << elapsed.count() << " seconds" << std::endl;
 }
 
 #include "CrashDataProcessor.h"
@@ -96,6 +101,7 @@ std::vector<CrashRecord> CrashDataProcessor::searchByLocation(float lat, float l
 
 // Implementation for displayStatistics
 void CrashDataProcessor::displayStatistics() const {
+    auto start = std::chrono::high_resolution_clock::now();
     long total_crashes = records.size();
     long total_injuries = 0;
     long total_killed = 0;
@@ -104,9 +110,12 @@ void CrashDataProcessor::displayStatistics() const {
         total_injuries += record.persons_injured;
         total_killed += record.persons_killed;
     }
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = end - start;
 
     std::cout << "Total Crashes: " << total_crashes << std::endl;
     std::cout << "Total Injuries: " << total_injuries << std::endl;
     std::cout << "Total Fatalities: " << total_killed << std::endl;
+    std::cout << "Execution Time: " << elapsed.count() << " seconds" << std::endl;
 }
 
