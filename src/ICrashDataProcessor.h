@@ -21,6 +21,11 @@ public:
     [[nodiscard]] virtual std::vector<CrashRecord> getCrashesByInjuryCountRange(int min_injuries, int max_injuries) = 0;
     [[nodiscard]] virtual std::vector<CrashRecord> getCrashesByLocationRange(float lat, float lon, float radius) = 0;
 
+    [[nodiscard]] virtual std::chrono::duration<double> getDataLoadDuration() const = 0;
+    [[nodiscard]] virtual std::chrono::duration<double> getDateRangeSearchingDuration() const = 0;
+    [[nodiscard]] virtual std::chrono::duration<double> getInjuryRangeSearchingDuration() const = 0;
+    [[nodiscard]] virtual std::chrono::duration<double> getLocationRangeSearchingDuration() const = 0;
+
 };
 
 #endif // ICRASH_DATA_PROCESSOR_H

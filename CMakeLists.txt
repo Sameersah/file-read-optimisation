@@ -11,4 +11,6 @@ add_executable(file_read_optimisation src/main.cpp
         src/ICrashDataProcessor.h
         src/SequentialProcessor/IfStreamProcessor/ProcessorUsingIfStream.h
         src/SequentialProcessor/IfStreamProcessor/ProcessorUsingIfStream.cpp
+        src/SequentialProcessor/BufferedFileReadProcessor/ProcessorUsingBufferedFileRead.h
+        src/SequentialProcessor/BufferedFileReadProcessor/ProcessorUsingBufferedFileRead.cpp
 )

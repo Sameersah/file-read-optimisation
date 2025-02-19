@@ -32,10 +32,10 @@ public:
      [[nodiscard]] std::vector<CrashRecord> getCrashesByLocationRange(float lat, float lon, float radius) override;
 
     //getters
-    [[nodiscard]] std::chrono::duration<double> getDataLoadDuration() const { return data_load_duration; }
-    [[nodiscard]] std::chrono::duration<double> getDateRangeSearchingDuration() const { return date_range_Searching_duration; }
-    [[nodiscard]] std::chrono::duration<double> getInjuryRangeSearchingDuration() const { return injury_range_Searching_duration; }
-    [[nodiscard]] std::chrono::duration<double> getLocationRangeSearchingDuration() const { return location_range_Searching_duration; }
+    [[nodiscard]] std::chrono::duration<double> getDataLoadDuration() const override { return data_load_duration; }
+    [[nodiscard]] std::chrono::duration<double> getDateRangeSearchingDuration() const override { return date_range_Searching_duration; }
+    [[nodiscard]] std::chrono::duration<double> getInjuryRangeSearchingDuration() const override { return injury_range_Searching_duration; }
+    [[nodiscard]] std::chrono::duration<double> getLocationRangeSearchingDuration() const override { return location_range_Searching_duration; }
 
 };
 

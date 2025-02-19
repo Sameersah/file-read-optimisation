@@ -8,7 +8,8 @@
 #include "../../ICrashDataProcessor.h"
 #include <unordered_map>
 #include <iostream>
-
+#include <vector>
+#include <chrono>
 
 class ProcessorUsingBufferedFileRead : public ICrashDataProcessor {
 private:
@@ -20,21 +21,22 @@ private:
     std::chrono::duration<double> location_range_Searching_duration = {};
 
 public:
-    //read data
-     void loadData(const std::string& filename) override;
+    ProcessorUsingBufferedFileRead() = default;
+    ~ProcessorUsingBufferedFileRead() override = default; // ✅ Ensure proper cleanup
 
+    // Read data
+    void loadData(const std::string& filename) override;
 
-    // APIs for range based searching
-     [[nodiscard]] std::vector<CrashRecord> getCrashesInDateRange(const std::string& start_date, const std::string& end_date) override;
-     [[nodiscard]] std::vector<CrashRecord> getCrashesByInjuryCountRange(int min_injuries, int max_injuries)  override;
-     [[nodiscard]] std::vector<CrashRecord> getCrashesByLocationRange(float lat, float lon, float radius) override;
+    // APIs for range-based searching
+    [[nodiscard]] std::vector<CrashRecord> getCrashesInDateRange(const std::string& start_date, const std::string& end_date)  override;
+    [[nodiscard]] std::vector<CrashRecord> getCrashesByInjuryCountRange(int min_injuries, int max_injuries)  override;
+    [[nodiscard]] std::vector<CrashRecord> getCrashesByLocationRange(float lat, float lon, float radius)  override;
 
-    //getters
-    [[nodiscard]] std::chrono::duration<double> getDataLoadDuration() const { return data_load_duration; }
-    [[nodiscard]] std::chrono::duration<double> getDateRangeSearchingDuration() const { return date_range_Searching_duration; }
-    [[nodiscard]] std::chrono::duration<double> getInjuryRangeSearchingDuration() const { return injury_range_Searching_duration; }
-    [[nodiscard]] std::chrono::duration<double> getLocationRangeSearchingDuration() const { return location_range_Searching_duration; }
-
+    // Getters
+    [[nodiscard]] std::chrono::duration<double> getDataLoadDuration() const override;
+    [[nodiscard]] std::chrono::duration<double> getDateRangeSearchingDuration() const override;
+    [[nodiscard]] std::chrono::duration<double> getInjuryRangeSearchingDuration() const override;
+    [[nodiscard]] std::chrono::duration<double> getLocationRangeSearchingDuration() const override;
 };
 
 #endif // PROCESSOR_USING_BUFFERED_FILE_READ_H
