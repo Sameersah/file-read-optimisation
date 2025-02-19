@@ -1,4 +1,4 @@
-#include "CrashDataProcessor.h"
+#include "SequentialProcessor/CrashDataProcessor.h"
 #include <memory>
 
 int main() {
@@ -7,21 +7,12 @@ int main() {
     auto processor = std::make_unique<CrashDataProcessor>();
     processor->loadData("../motor_vehicle_collisions.csv");
 
-    std::cout << "\nCrash Statistics:\n";
-    processor->displayStatistics();
+    std::cout << "Data load duration: " << processor->getDataLoadDuration().count() << " seconds" << std::endl;
 
-    /*
-    std::cout << "\nSearching for crashes on 2023-01-01:\n";
-    auto results = processor->searchByDate("2023-01-01");
-    for (const auto& record : results) {
-        std::cout << "Crash on " << record.crash_date << " at " << record.crash_time << " with " << record.persons_injured << " injuries." << std::endl;
-    }
-    */
-
-    std::cout<<"-----------------"<<std::endl;
+    std::cout<<"------------------------------------------------------------------------"<<std::endl;
 
     std::cout<<"-----------------Approach 2-Buffered File Reading ---------------"<<std::endl;
- //gdfgdgdfghfgf
+
     std::cout<<"-----------------"<<std::endl;
 
     std::cout<<"-----------------Approach 3-Multi-threaded Parsing ---------------"<<std::endl;
