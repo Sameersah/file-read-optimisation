@@ -11,9 +11,10 @@
 #include <sstream>
 #include <iomanip>
 #include <ctime>
-#include "CrashDataProcessor.h"
+#include "ProcessorUsingIfStream.h"
 
-void CrashDataProcessor::loadData(const std::string& filename) {
+
+void ProcessorUsingIfStream::loadData(const std::string& filename) {
     auto start = std::chrono::high_resolution_clock::now();
     std::ifstream file(filename);
     if (!file.is_open()) {
@@ -122,7 +123,7 @@ void CrashDataProcessor::loadData(const std::string& filename) {
 }
 
 
-std::vector<CrashRecord> CrashDataProcessor::getCrashesInDateRange(const std::string& start_date, const std::string& end_date) {
+std::vector<CrashRecord> ProcessorUsingIfStream::getCrashesInDateRange(const std::string& start_date, const std::string& end_date) {
     auto start = std::chrono::high_resolution_clock::now();
     std::vector<CrashRecord> filtered_crashes;
     std::tm start_tm = {}, end_tm = {};
@@ -158,7 +159,7 @@ std::vector<CrashRecord> CrashDataProcessor::getCrashesInDateRange(const std::st
     return filtered_crashes;
 }
 
-std::vector<CrashRecord> CrashDataProcessor::getCrashesByInjuryCountRange(int min_injuries, int max_injuries)  {
+std::vector<CrashRecord> ProcessorUsingIfStream::getCrashesByInjuryCountRange(int min_injuries, int max_injuries)  {
         auto start = std::chrono::high_resolution_clock::now();
         std::vector<CrashRecord> filtered_crashes;
         for (const auto& record : records) {
@@ -173,7 +174,7 @@ std::vector<CrashRecord> CrashDataProcessor::getCrashesByInjuryCountRange(int mi
     }
 
 
-std::vector<CrashRecord> CrashDataProcessor::getCrashesByLocationRange(float lat, float lon, float radius)  {
+std::vector<CrashRecord> ProcessorUsingIfStream::getCrashesByLocationRange(float lat, float lon, float radius)  {
     return {};
 }
 

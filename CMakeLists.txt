@@ -7,8 +7,8 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_executable(file_read_optimisation src/main.cpp
-        src/SequentialProcessor/CrashRecord.h
+        src/SequentialProcessor/common/CrashRecord.h
         src/ICrashDataProcessor.h
-        src/SequentialProcessor/CrashDataProcessor.h
-        src/SequentialProcessor/CrashDataProcessor.cpp
+        src/SequentialProcessor/IfStreamProcessor/ProcessorUsingIfStream.h
+        src/SequentialProcessor/IfStreamProcessor/ProcessorUsingIfStream.cpp
 )

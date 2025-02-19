@@ -1,10 +1,10 @@
-#include "SequentialProcessor/CrashDataProcessor.h"
+#include "SequentialProcessor/IfStreamProcessor/ProcessorUsingIfStream.h"
 #include <memory>
 
 int main() {
 
     std::cout<<"-----------------Approach 1-Single Thread- using ifstream---------------"<<std::endl;
-    auto processor = std::make_unique<CrashDataProcessor>();
+    auto processor = std::make_unique<ProcessorUsingIfStream>();
     std::cout << "Loading data..." << std::endl;
     processor->loadData("../motor_vehicle_collisions.csv");
     std::cout << "Data load duration: " << processor->getDataLoadDuration().count() << " seconds" << std::endl;

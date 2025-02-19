@@ -11,6 +11,7 @@
 #include <sstream>
 #include <iomanip>
 #include <ctime>
+#include "src/SequentialProcessor/common/CrashRecord.h"
 #include "ProcessorUsingBufferedFileRead.h"
 
 void ProcessorUsingBufferedFileRead::loadData(const std::string& filename) {
@@ -122,7 +123,7 @@ void ProcessorUsingBufferedFileRead::loadData(const std::string& filename) {
 }
 
 
-std::vector<CrashRecord> CrashDataProcessor::getCrashesInDateRange(const std::string& start_date, const std::string& end_date) {
+std::vector<CrashRecord> ProcessorUsingBufferedFileRead::getCrashesInDateRange(const std::string& start_date, const std::string& end_date) {
     auto start = std::chrono::high_resolution_clock::now();
     std::vector<CrashRecord> filtered_crashes;
     std::tm start_tm = {}, end_tm = {};
@@ -158,11 +159,11 @@ std::vector<CrashRecord> CrashDataProcessor::getCrashesInDateRange(const std::st
     return filtered_crashes;
 }
 
-std::vector<CrashRecord> CrashDataProcessor::getCrashesByInjuryCountRange(int min_injuries, int max_injuries)  {
+std::vector<CrashRecord> ProcessorUsingBufferedFileRead::getCrashesByInjuryCountRange(int min_injuries, int max_injuries)  {
     return {};
 }
 
-std::vector<CrashRecord> CrashDataProcessor::getCrashesByLocationRange(float lat, float lon, float radius)  {
+std::vector<CrashRecord> ProcessorUsingBufferedFileRead::getCrashesByLocationRange(float lat, float lon, float radius)  {
     return {};
 }
 
