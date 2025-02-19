@@ -2,15 +2,15 @@
 // Created by Sameer on 18/02/25.
 //
 
-#ifndef CRASH_DATA_PROCESSOR_H
-#define CRASH_DATA_PROCESSOR_H
+#ifndef PROCESSOR_USING_BUFFERED_FILE_READ_H
+#define PROCESSOR_USING_BUFFERED_FILE_READ_H
 
-#include "../ICrashDataProcessor.h"
+#include "../../ICrashDataProcessor.h"
 #include <unordered_map>
 #include <iostream>
 
 
-class CrashDataProcessor : public ICrashDataProcessor {
+class ProcessorUsingBufferedFileRead : public ICrashDataProcessor {
 private:
     std::vector<CrashRecord> records;
     std::unordered_map<std::string, std::vector<CrashRecord>> dateIndex;
@@ -37,4 +37,4 @@ public:
 
 };
 
-#endif // CRASH_DATA_PROCESSOR_H
+#endif // PROCESSOR_USING_BUFFERED_FILE_READ_H

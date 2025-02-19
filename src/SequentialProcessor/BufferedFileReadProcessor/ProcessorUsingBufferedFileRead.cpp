@@ -11,9 +11,9 @@
 #include <sstream>
 #include <iomanip>
 #include <ctime>
-#include "CrashDataProcessor.h"
+#include "ProcessorUsingBufferedFileRead.h"
 
-void CrashDataProcessor::loadData(const std::string& filename) {
+void ProcessorUsingBufferedFileRead::loadData(const std::string& filename) {
     auto start = std::chrono::high_resolution_clock::now();
     std::ifstream file(filename);
     if (!file.is_open()) {
@@ -159,19 +159,8 @@ std::vector<CrashRecord> CrashDataProcessor::getCrashesInDateRange(const std::st
 }
 
 std::vector<CrashRecord> CrashDataProcessor::getCrashesByInjuryCountRange(int min_injuries, int max_injuries)  {
-        auto start = std::chrono::high_resolution_clock::now();
-        std::vector<CrashRecord> filtered_crashes;
-        for (const auto& record : records) {
-            if (record.persons_injured >= min_injuries && record.persons_injured <= max_injuries) {
-                filtered_crashes.push_back(record);
-            }
-        }
-        // Benchmarking
-        auto end = std::chrono::high_resolution_clock::now();
-        injury_range_Searching_duration = end - start;
-        return filtered_crashes;
-    }
-
+    return {};
+}
 
 std::vector<CrashRecord> CrashDataProcessor::getCrashesByLocationRange(float lat, float lon, float radius)  {
     return {};
