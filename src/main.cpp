@@ -9,6 +9,8 @@
 #include "OptimalProcessor/Experiment1ObjectofArrays/OptimalProcessorUsingThreads.h"
 #include "OptimalProcessor/Experiment2BufferRead/OptimalBufferRead.h"
 #include "OptimalProcessor/Experiment3BufferReadVectorReserve/OptimalVectorReserve.h"
+#include "OptimalProcessor/Experiment4BufferReadVectorReserveThreadLocalBuffer/ProcessorUsingThreadLocalBuffer.h"
+
 
 void runProcessor(std::unique_ptr<ICrashDataProcessor>& processor) {
     std::string filename = "../motor_vehicle_collisions.csv";
@@ -64,15 +66,17 @@ int main() {
         std::cout << "9. Optimized Multi Thread Processor - object of Arrays\n";
         std::cout << "10. Optimized Multi Thread Processor - Object of Arrays, Buffer file Read\n";
         std::cout << "11. Optimized Multi Thread Processor- Object of Arrays, buffer file read and vector memory reserve\n";
+        std::cout << "12. Optimized Multi Thread Processor- Object of Arrays, buffer file read, vector memory reserve "
+                     "and thread local buffer\n";
 
-        std::cout << "12. Exit\n";
+        std::cout << "13. Exit\n";
         std::cout << "=====================================================\n";
         std::cout << "Select processing method: ";
 
         int choice;
         std::cin >> choice;
 
-        if (choice == 12) {
+        if (choice == 13) {
             std::cout << "Exiting program. Goodbye!\n";
             break;
         }
@@ -141,6 +145,13 @@ int main() {
                 processor = std::make_unique<OptimalVectorReserve>();
                 runProcessor(processor);
                 break;
+
+            case 12:
+                std::cout << "\nOptimized Multi Thread Processor- Object of Arrays, buffer file read,vector memory reserve "
+                     "and thread local buffer\n";
+            processor = std::make_unique<ProcessorUsingThreadLocalBuffer>();
+            runProcessor(processor);
+            break;
 
             default:
                 std::cout << "Invalid choice. Please enter a valid option.\n";

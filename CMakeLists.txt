@@ -40,6 +40,8 @@ add_executable(file_read_optimisation
         src/OptimalProcessor/Experiment2BufferRead/OptimalBufferRead.cpp
         src/OptimalProcessor/Experiment3BufferReadVectorReserve/OptimalVectorReserve.h
         src/OptimalProcessor/Experiment3BufferReadVectorReserve/OptimalVectorReserve.cpp
+        src/OptimalProcessor/Experiment4BufferReadVectorReserveThreadLocalBuffer/ProcessorUsingThreadLocalBuffer.h
+        src/OptimalProcessor/Experiment4BufferReadVectorReserveThreadLocalBuffer/ProcessorUsingThreadLocalBuffer.cpp
 )
 
 # Manually link OpenMP
