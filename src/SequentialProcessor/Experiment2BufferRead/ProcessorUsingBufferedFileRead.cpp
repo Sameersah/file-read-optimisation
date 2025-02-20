@@ -174,7 +174,24 @@ int ProcessorUsingBufferedFileRead::getCrashesByInjuryCountRange(int min_injurie
 }
 
 int ProcessorUsingBufferedFileRead::getCrashesByLocationRange(float lat, float lon, float radius)  {
-    return {};
+    auto start = std::chrono::high_resolution_clock::now();
+    int crash_count = 0;
+    float radius_squared = radius * radius; // Precompute squared radius
+
+    for (const auto& record : records) {
+        float d_lat = record.latitude - lat;
+        float d_lon = record.longitude - lon;
+        float dist_squared = d_lat * d_lat + d_lon * d_lon; // Squared distance calculation
+
+        if (dist_squared <= radius_squared) {
+            crash_count++;
+        }
+    }
+
+    // Benchmarking
+    auto end = std::chrono::high_resolution_clock::now();
+    location_range_Searching_duration = end - start;
+    return crash_count;
 }
 
 

@@ -5,8 +5,7 @@
 #ifndef ICRASH_DATA_PROCESSOR_H
 #define ICRASH_DATA_PROCESSOR_H
 
-#include "SequentialProcessor/common/CrashRecord.h"
-#include <vector>
+
 #include <string>
 
 class ICrashDataProcessor {

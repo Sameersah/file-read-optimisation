@@ -16,7 +16,7 @@ private:
     std::vector<int> persons_injured;
     std::vector<float> latitudes;
     std::vector<float> longitudes;
-    std::unordered_map<std::string, std::vector<CrashRecord>> dateIndex;
+
     std::chrono::duration<double> data_load_duration = {};
     std::chrono::duration<double> date_range_Searching_duration = {};
     std::chrono::duration<double> injury_range_Searching_duration = {};
