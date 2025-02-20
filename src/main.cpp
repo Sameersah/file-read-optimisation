@@ -1,14 +1,14 @@
 #include <iostream>
 #include <memory>
-#include "SequentialProcessor/IfStreamProcessor/ProcessorUsingIfStream.h"
-#include "SequentialProcessor/BufferedFileReadProcessor/ProcessorUsingBufferedFileRead.h"
-#include "SequentialProcessor/BufferedFileReadVectorReserveProcessor/ProcessorUsingBufferedFileReadVectorReserve.h"
-#include "ParallelProcessor/Experiment1-Threads/ProcessorUsingThreads.h"
-#include "ParallelProcessor/Experiment2-BufferedRead/ParallelBufferRead.h"
-#include "ParallelProcessor/Experiment3-VectorReserve/ParallelVectorReserve.h"
+#include "SequentialProcessor/Experiment1IfStream/ProcessorUsingIfStream.h"
+#include "SequentialProcessor/Experiment2BufferRead/ProcessorUsingBufferedFileRead.h"
+#include "SequentialProcessor/Experiment3BufferReadVectorReserve/ProcessorUsingBufferedFileReadVectorReserve.h"
+#include "ParallelProcessor/Experiment1MultiThreads/ProcessorUsingThreads.h"
+#include "ParallelProcessor/Experiment2BufferedRead/ParallelBufferRead.h"
+#include "ParallelProcessor/Experiment3BufferReadVectorReserve/ParallelVectorReserve.h"
 #include "OptimalProcessor/IfStreamProcessor/OptimalProcessorUsingThreads.h"
-#include "OptimalProcessor/Experiment2-BufferRead/OptimalBufferRead.h"
-#include "OptimalProcessor/Experiment3-VectorReserve/OptimalVectorReserve.h"
+#include "OptimalProcessor/Experiment2BufferRead/OptimalBufferRead.h"
+#include "OptimalProcessor/Experiment3BufferReadVectorReserve/OptimalVectorReserve.h"
 
 void runProcessor(std::unique_ptr<ICrashDataProcessor>& processor) {
     std::string filename = "../motor_vehicle_collisions.csv";

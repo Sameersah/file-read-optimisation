@@ -22,24 +22,24 @@ add_executable(file_read_optimisation
     src/main.cpp
     src/SequentialProcessor/common/CrashRecord.h
     src/ICrashDataProcessor.h
-    src/SequentialProcessor/IfStreamProcessor/ProcessorUsingIfStream.h
-    src/SequentialProcessor/IfStreamProcessor/ProcessorUsingIfStream.cpp
-    src/SequentialProcessor/BufferedFileReadProcessor/ProcessorUsingBufferedFileRead.h
-    src/SequentialProcessor/BufferedFileReadProcessor/ProcessorUsingBufferedFileRead.cpp
-    src/SequentialProcessor/BufferedFileReadVectorReserveProcessor/ProcessorUsingBufferedFileReadVectorReserve.h
-    src/SequentialProcessor/BufferedFileReadVectorReserveProcessor/ProcessorUsingBufferedFileReadVectorReserve.cpp
-    src/ParallelProcessor/Experiment1-Threads/ProcessorUsingThreads.h
-    src/ParallelProcessor/Experiment1-Threads/ProcessorUsingThreads.cpp
-    src/ParallelProcessor/Experiment2-BufferedRead/ParallelBufferRead.h
-    src/ParallelProcessor/Experiment2-BufferedRead/ParallelBufferRead.cpp
-    src/ParallelProcessor/Experiment3-VectorReserve/ParallelVectorReserve.h
-    src/ParallelProcessor/Experiment3-VectorReserve/ParallelVectorReserve.cpp
+        src/SequentialProcessor/Experiment1IfStream/ProcessorUsingIfStream.h
+        src/SequentialProcessor/Experiment1IfStream/ProcessorUsingIfStream.cpp
+        src/SequentialProcessor/Experiment2BufferRead/ProcessorUsingBufferedFileRead.h
+        src/SequentialProcessor/Experiment2BufferRead/ProcessorUsingBufferedFileRead.cpp
+        src/SequentialProcessor/Experiment3BufferReadVectorReserve/ProcessorUsingBufferedFileReadVectorReserve.h
+        src/SequentialProcessor/Experiment3BufferReadVectorReserve/ProcessorUsingBufferedFileReadVectorReserve.cpp
+        src/ParallelProcessor/Experiment1MultiThreads/ProcessorUsingThreads.h
+        src/ParallelProcessor/Experiment1MultiThreads/ProcessorUsingThreads.cpp
+        src/ParallelProcessor/Experiment2BufferedRead/ParallelBufferRead.h
+        src/ParallelProcessor/Experiment2BufferedRead/ParallelBufferRead.cpp
+        src/ParallelProcessor/Experiment3BufferReadVectorReserve/ParallelVectorReserve.h
+        src/ParallelProcessor/Experiment3BufferReadVectorReserve/ParallelVectorReserve.cpp
     src/OptimalProcessor/IfStreamProcessor/OptimalProcessorUsingThreads.h
     src/OptimalProcessor/IfStreamProcessor/OptimalProcessorUsingThreads.cpp
-    src/OptimalProcessor/Experiment2-BufferRead/OptimalBufferRead.h
-    src/OptimalProcessor/Experiment2-BufferRead/OptimalBufferRead.cpp
-    src/OptimalProcessor/Experiment3-VectorReserve/OptimalVectorReserve.h
-    src/OptimalProcessor/Experiment3-VectorReserve/OptimalVectorReserve.cpp
+        src/OptimalProcessor/Experiment2BufferRead/OptimalBufferRead.h
+        src/OptimalProcessor/Experiment2BufferRead/OptimalBufferRead.cpp
+        src/OptimalProcessor/Experiment3BufferReadVectorReserve/OptimalVectorReserve.h
+        src/OptimalProcessor/Experiment3BufferReadVectorReserve/OptimalVectorReserve.cpp
 )
 
 # Manually link OpenMP
