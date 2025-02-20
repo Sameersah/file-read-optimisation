@@ -13,4 +13,6 @@ add_executable(file_read_optimisation src/main.cpp
         src/SequentialProcessor/IfStreamProcessor/ProcessorUsingIfStream.cpp
         src/SequentialProcessor/BufferedFileReadProcessor/ProcessorUsingBufferedFileRead.h
         src/SequentialProcessor/BufferedFileReadProcessor/ProcessorUsingBufferedFileRead.cpp
+        src/SequentialProcessor/BufferedFileReadVectorReserveProcessor/ProcessorUsingBufferedFileReadVectorReserve.h
+        src/SequentialProcessor/BufferedFileReadVectorReserveProcessor/ProcessorUsingBufferedFileReadVectorReserve.cpp
 )

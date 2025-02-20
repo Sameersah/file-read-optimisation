@@ -2,6 +2,7 @@
 #include <memory>
 #include "SequentialProcessor/IfStreamProcessor/ProcessorUsingIfStream.h"
 #include "SequentialProcessor/BufferedFileReadProcessor/ProcessorUsingBufferedFileRead.h"
+#include "SequentialProcessor/BufferedFileReadVectorReserveProcessor/ProcessorUsingBufferedFileReadVectorReserve.h"
 
 void runProcessor(std::unique_ptr<ICrashDataProcessor>& processor) {
     std::string filename = "../motor_vehicle_collisions.csv";
@@ -48,7 +49,7 @@ int main() {
         std::cout << "\n=============== Crash Data Processing ===============\n";
         std::cout << "1. Single Thread (ifstream)\n";
         std::cout << "2. Buffered File Read\n";
-        std::cout << "3. Multi-threaded Parsing (Coming Soon)\n";
+        std::cout << "3. Buffered File Read and Vector memory reserve\n";
         std::cout << "4. Memory-Mapped File (Coming Soon)\n";
         std::cout << "5. Binary Format Processing (Coming Soon)\n";
         std::cout << "6. Exit\n";
@@ -79,7 +80,9 @@ int main() {
                 break;
 
             case 3:
-                std::cout << "\nMulti-threaded Parsing is not implemented yet.\n";
+                std::cout << "\nUsing Buffered File Read and Vector reserve Processing...\n";
+               processor = std::make_unique<ProcessorUsingBufferedFileReadVectorReserve>();
+                runProcessor(processor);
                 break;
 
             case 4:

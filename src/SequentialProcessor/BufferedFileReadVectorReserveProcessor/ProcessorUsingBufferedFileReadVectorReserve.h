@@ -2,8 +2,8 @@
 // Created by Sameer on 18/02/25.
 //
 
-#ifndef PROCESSOR_USING_BUFFERED_FILE_READ_H
-#define PROCESSOR_USING_BUFFERED_FILE_READ_H
+#ifndef PROCESSOR_USING_BUFFERED_FILE_READ_VECTOR_RESERVE_H
+#define PROCESSOR_USING_BUFFERED_FILE_READ_VECTOR_RESERVE_H
 
 #include "../../ICrashDataProcessor.h"
 #include <unordered_map>
@@ -11,7 +11,7 @@
 #include <vector>
 #include <chrono>
 
-class ProcessorUsingBufferedFileRead : public ICrashDataProcessor {
+class ProcessorUsingBufferedFileReadVectorReserve : public ICrashDataProcessor {
 private:
     std::vector<CrashRecord> records;
     std::unordered_map<std::string, std::vector<CrashRecord>> dateIndex;
@@ -21,8 +21,8 @@ private:
     std::chrono::duration<double> location_range_Searching_duration = {};
 
 public:
-    ProcessorUsingBufferedFileRead() = default;
-    ~ProcessorUsingBufferedFileRead() override = default; // ✅ Ensure proper cleanup
+    ProcessorUsingBufferedFileReadVectorReserve() = default;
+    ~ProcessorUsingBufferedFileReadVectorReserve() override = default; // ✅ Ensure proper cleanup
 
     // Read data
     void loadData(const std::string& filename) override;
@@ -40,4 +40,4 @@ public:
     [[nodiscard]] std::chrono::duration<double> getLocationRangeSearchingDuration() const override;
 };
 
-#endif // PROCESSOR_USING_BUFFERED_FILE_READ_H
+#endif // PROCESSOR_USING_BUFFERED_FILE_READ_VECTOR_RESERVE_H

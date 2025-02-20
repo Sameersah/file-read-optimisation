@@ -1,5 +1,5 @@
 #include "../common/CrashRecord.h"
-#include "ProcessorUsingBufferedFileRead.h"
+#include "ProcessorUsingBufferedFileReadVectorReserve.h"
 
 #include <iostream>
 #include <fstream>
@@ -10,7 +10,7 @@
 #include <mutex>
 
 
-void ProcessorUsingBufferedFileRead::loadData(const std::string& filename) {
+void ProcessorUsingBufferedFileReadVectorReserve::loadData(const std::string& filename) {
     auto start = std::chrono::high_resolution_clock::now();
 
     // Open the file in binary mode for efficient reading
@@ -51,7 +51,7 @@ void ProcessorUsingBufferedFileRead::loadData(const std::string& filename) {
     data_load_duration = end - start;
 }
 
-void ProcessorUsingBufferedFileRead::processLine(const std::string& line) {
+void ProcessorUsingBufferedFileReadVectorReserve::processLine(const std::string& line) {
     std::istringstream ss(line);
     std::string token;
     CrashRecord record;
@@ -123,7 +123,7 @@ void ProcessorUsingBufferedFileRead::processLine(const std::string& line) {
 }
 
 
-std::vector<CrashRecord> ProcessorUsingBufferedFileRead::getCrashesInDateRange(const std::string& start_date, const std::string& end_date)  {
+std::vector<CrashRecord> ProcessorUsingBufferedFileReadVectorReserve::getCrashesInDateRange(const std::string& start_date, const std::string& end_date)  {
     auto start = std::chrono::high_resolution_clock::now();
     std::vector<CrashRecord> filtered_crashes;
     std::tm start_tm = {}, end_tm = {};
@@ -159,7 +159,7 @@ std::vector<CrashRecord> ProcessorUsingBufferedFileRead::getCrashesInDateRange(c
     return filtered_crashes;
 }
 
-std::vector<CrashRecord> ProcessorUsingBufferedFileRead::getCrashesByInjuryCountRange(int min_injuries, int max_injuries)  {
+std::vector<CrashRecord> ProcessorUsingBufferedFileReadVectorReserve::getCrashesByInjuryCountRange(int min_injuries, int max_injuries)  {
     auto start = std::chrono::high_resolution_clock::now();
     std::vector<CrashRecord> filtered_crashes;
     for (const auto& record : records) {
@@ -173,23 +173,23 @@ std::vector<CrashRecord> ProcessorUsingBufferedFileRead::getCrashesByInjuryCount
     return filtered_crashes;
 }
 
-std::vector<CrashRecord> ProcessorUsingBufferedFileRead::getCrashesByLocationRange(float lat, float lon, float radius)  {
+std::vector<CrashRecord> ProcessorUsingBufferedFileReadVectorReserve::getCrashesByLocationRange(float lat, float lon, float radius)  {
     return {};
 }
 
 
-std::chrono::duration<double> ProcessorUsingBufferedFileRead::getDataLoadDuration() const {
+std::chrono::duration<double> ProcessorUsingBufferedFileReadVectorReserve::getDataLoadDuration() const {
     return data_load_duration;
 }
 
-std::chrono::duration<double> ProcessorUsingBufferedFileRead::getDateRangeSearchingDuration() const {
+std::chrono::duration<double> ProcessorUsingBufferedFileReadVectorReserve::getDateRangeSearchingDuration() const {
     return date_range_Searching_duration;
 }
 
-std::chrono::duration<double> ProcessorUsingBufferedFileRead::getInjuryRangeSearchingDuration() const {
+std::chrono::duration<double> ProcessorUsingBufferedFileReadVectorReserve::getInjuryRangeSearchingDuration() const {
     return injury_range_Searching_duration;
 }
 
-std::chrono::duration<double> ProcessorUsingBufferedFileRead::getLocationRangeSearchingDuration() const {
+std::chrono::duration<double> ProcessorUsingBufferedFileReadVectorReserve::getLocationRangeSearchingDuration() const {
     return location_range_Searching_duration;
 }
