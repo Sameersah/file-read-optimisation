@@ -8,18 +8,7 @@
 #include <mutex>
 #include <thread>
 #include <omp.h>
-
-
-#include "ProcessorUsingThreadLocalBuffer.h"
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <unordered_map>
-#include <chrono>
-#include <sstream>
-#include <mutex>
-#include <thread>
-#include <omp.h>
+#include "../../MemoryUsage.h"
 
 void ProcessorUsingThreadLocalBuffer::loadData(const std::string& filename) {
     auto start = std::chrono::high_resolution_clock::now();
@@ -68,6 +57,7 @@ void ProcessorUsingThreadLocalBuffer::loadData(const std::string& filename) {
 
     auto end = std::chrono::high_resolution_clock::now();
     data_load_duration = end - start;
+    MemoryUsage::printMemoryUsage("ProcessorUsingThreadLocalBuffer");
 }
 
 void ProcessorUsingThreadLocalBuffer::processLinesParallel(const std::vector<std::string>& lines) {

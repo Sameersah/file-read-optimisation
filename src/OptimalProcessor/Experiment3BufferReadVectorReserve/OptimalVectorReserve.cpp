@@ -9,6 +9,7 @@
 #include <thread>
 #include <omp.h>
 // #include "../../SequentialProcessor/common/GlobalMutex.h"
+#include "../../MemoryUsage.h"
 
 
 // std::mutex records_mutex;
@@ -60,6 +61,7 @@ void OptimalVectorReserve::loadData(const std::string& filename) {
 
     auto end = std::chrono::high_resolution_clock::now();
     data_load_duration = end - start;
+    MemoryUsage::printMemoryUsage("OptimalVectorReserve");
 }
 
 void OptimalVectorReserve::processLinesParallel(const std::vector<std::string>& lines) {

@@ -8,6 +8,7 @@
 #include <chrono>
 #include <sstream>
 #include <mutex>
+#include "../../MemoryUsage.h"
 
 
 void ProcessorUsingBufferedFileReadVectorReserve::loadData(const std::string& filename) {
@@ -49,6 +50,7 @@ void ProcessorUsingBufferedFileReadVectorReserve::loadData(const std::string& fi
     file.close();
     auto end = std::chrono::high_resolution_clock::now();
     data_load_duration = end - start;
+    MemoryUsage::printMemoryUsage("ProcessorUsingBufferedFileReadVectorReserve");
 }
 
 void ProcessorUsingBufferedFileReadVectorReserve::processLine(const std::string& line) {

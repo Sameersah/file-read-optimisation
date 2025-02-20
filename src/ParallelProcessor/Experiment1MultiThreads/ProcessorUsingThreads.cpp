@@ -7,6 +7,7 @@
 #include <thread>
 #include <mutex>
 #include <omp.h>
+#include "../../MemoryUsage.h"
 
 void ProcessorUsingThreads::loadData(const std::string& filename) {
     auto start = std::chrono::high_resolution_clock::now();
@@ -64,6 +65,8 @@ void ProcessorUsingThreads::loadData(const std::string& filename) {
     auto end = std::chrono::high_resolution_clock::now();
     data_load_duration = end - start;
     std::cout << "Parallel Data Load Time: " << data_load_duration.count() << " seconds\n";
+
+    MemoryUsage::printMemoryUsage("ProcessorUsingThreads");
 }
 
 // Multi-threaded search for date range

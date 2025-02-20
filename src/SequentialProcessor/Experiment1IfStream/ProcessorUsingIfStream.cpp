@@ -12,6 +12,7 @@
 #include <iomanip>
 #include <ctime>
 #include "ProcessorUsingIfStream.h"
+#include "../../MemoryUsage.h"
 
 
 void ProcessorUsingIfStream::loadData(const std::string& filename) {
@@ -120,6 +121,7 @@ void ProcessorUsingIfStream::loadData(const std::string& filename) {
     //benchmarking
     auto end = std::chrono::high_resolution_clock::now();
     data_load_duration = end - start;
+    MemoryUsage::printMemoryUsage("ProcessorUsingIfStream");
 }
 
 

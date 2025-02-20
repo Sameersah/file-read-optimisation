@@ -8,6 +8,8 @@
 #include <mutex>
 #include <thread>
 #include <omp.h>
+#include "../../MemoryUsage.h"
+
 // #include "../../SequentialProcessor/common/GlobalMutex.h"
 
 // std::mutex records_mutex;
@@ -52,6 +54,7 @@ void ProcessorUsingBufferedFileReadThreads::loadData(const std::string& filename
 
     auto end = std::chrono::high_resolution_clock::now();
     data_load_duration = end - start;
+    MemoryUsage::printMemoryUsage("ProcessorUsingBufferedFileReadThreads");
 }
 
 void ProcessorUsingBufferedFileReadThreads::processLinesParallel(const std::vector<std::string>& lines) {

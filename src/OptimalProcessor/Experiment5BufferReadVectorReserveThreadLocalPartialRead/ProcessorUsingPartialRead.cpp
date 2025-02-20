@@ -9,6 +9,7 @@
 #include <sstream>
 #include <sys/mman.h>
 #include <unistd.h>
+#include "../../MemoryUsage.h"
 
 
 
@@ -56,6 +57,7 @@ void ProcessorUsingPartialRead::loadData(const std::string& filename) {
 
     auto end = std::chrono::high_resolution_clock::now();
     data_load_duration = end - start;
+    MemoryUsage::printMemoryUsage("ProcessorUsingPartialRead");
 }
 
 void ProcessorUsingPartialRead::processFileParallel(char* data, size_t file_size) {
