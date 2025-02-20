@@ -7,7 +7,7 @@
 
 
 #include <string>
-#include "SequentialProcessor/common/CrashRecord.h"
+#include "CrashRecord.h"
 
 class ICrashDataProcessor {
 public:

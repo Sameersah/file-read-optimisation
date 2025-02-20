@@ -1,8 +1,8 @@
 #ifndef OPTIMAL_BUFFER_READ_H
 #define OPTIMAL_BUFFER_READ_H
 
-#include "../../SequentialProcessor/common/CrashRecord.h"
-#include "../../ICrashDataProcessor.h"
+
+#include "../../common/ICrashDataProcessor.h"
 
 #include <vector>
 #include <unordered_map>

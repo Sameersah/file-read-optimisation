@@ -1,7 +1,7 @@
 #ifndef PROCESSOR_USING_THREADS_H
 #define PROCESSOR_USING_THREADS_H
 
-#include "../../ICrashDataProcessor.h"
+#include "../../common/ICrashDataProcessor.h"
 #include <unordered_map>
 #include <iostream>
 #include <vector>

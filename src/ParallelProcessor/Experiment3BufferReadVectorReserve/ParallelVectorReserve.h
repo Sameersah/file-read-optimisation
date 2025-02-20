@@ -1,8 +1,8 @@
 #ifndef PROCESSOR_USING_BUFFERED_FILE_READ_VECTOR_RESERVE_THREADS_H
 #define PROCESSOR_USING_BUFFERED_FILE_READ_VECTOR_RESERVE_THREADS_H
 
-#include "../../SequentialProcessor/common/CrashRecord.h"
-#include "../../ICrashDataProcessor.h"
+
+#include "../../common/ICrashDataProcessor.h"
 
 #include <vector>
 #include <unordered_map>

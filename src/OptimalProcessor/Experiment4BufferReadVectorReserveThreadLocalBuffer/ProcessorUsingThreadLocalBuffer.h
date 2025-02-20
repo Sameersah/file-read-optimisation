@@ -1,8 +1,8 @@
 #ifndef PROCESSOR_USING_THREAD_LOCAL_BUFFER_H
 #define PROCESSOR_USING_THREAD_LOCAL_BUFFER_H
 
-#include "../../SequentialProcessor/common/CrashRecord.h"
-#include "../../ICrashDataProcessor.h"
+
+#include "../../common/ICrashDataProcessor.h"
 
 #include <vector>
 #include <unordered_map>

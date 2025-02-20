@@ -5,7 +5,7 @@
 #ifndef PROCESSOR_USING_BUFFERED_FILE_READ_VECTOR_RESERVE_H
 #define PROCESSOR_USING_BUFFERED_FILE_READ_VECTOR_RESERVE_H
 
-#include "../../ICrashDataProcessor.h"
+#include "../../common/ICrashDataProcessor.h"
 #include <unordered_map>
 #include <iostream>
 #include <vector>

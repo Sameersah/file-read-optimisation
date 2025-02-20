@@ -1,4 +1,4 @@
-#include "../common/CrashRecord.h"
+
 #include "ProcessorUsingBufferedFileRead.h"
 
 #include <iostream>

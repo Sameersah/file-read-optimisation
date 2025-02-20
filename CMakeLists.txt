@@ -20,8 +20,8 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L${OPENMP_ROOT}/lib -lomp
 
 add_executable(file_read_optimisation
     src/main.cpp
-    src/SequentialProcessor/common/CrashRecord.h
-    src/ICrashDataProcessor.h
+        src/common/CrashRecord.h
+        src/common/ICrashDataProcessor.h
         src/SequentialProcessor/Experiment1IfStream/ProcessorUsingIfStream.h
         src/SequentialProcessor/Experiment1IfStream/ProcessorUsingIfStream.cpp
         src/SequentialProcessor/Experiment2BufferRead/ProcessorUsingBufferedFileRead.h
