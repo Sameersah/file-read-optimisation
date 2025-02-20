@@ -1,5 +1,4 @@
 #include <iostream>
-#include <memory>
 #include "SequentialProcessor/Experiment1IfStream/ProcessorUsingIfStream.h"
 #include "SequentialProcessor/Experiment2BufferRead/ProcessorUsingBufferedFileRead.h"
 #include "SequentialProcessor/Experiment3BufferReadVectorReserve/ProcessorUsingBufferedFileReadVectorReserve.h"
