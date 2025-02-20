@@ -3,7 +3,9 @@
 #include "SequentialProcessor/IfStreamProcessor/ProcessorUsingIfStream.h"
 #include "SequentialProcessor/BufferedFileReadProcessor/ProcessorUsingBufferedFileRead.h"
 #include "SequentialProcessor/BufferedFileReadVectorReserveProcessor/ProcessorUsingBufferedFileReadVectorReserve.h"
-#include "ParallelProcessor/ProcessorUsingThreads.h"
+#include "ParallelProcessor/Experiment1-Threads/ProcessorUsingThreads.h"
+#include "ParallelProcessor/Experiment2-BufferedRead/ParallelBufferRead.h"
+#include "ParallelProcessor/Experiment3-VectorReserve/ParallelVectorReserve.h"
 #include "OptimalProcessor/IfStreamProcessor/OptimalProcessorUsingThreads.h"
 
 void runProcessor(std::unique_ptr<ICrashDataProcessor>& processor) {
@@ -53,17 +55,19 @@ int main() {
         std::cout << "2. Buffered File Read\n";
         std::cout << "3. Buffered File Read and Vector memory reserve\n";
         std::cout << "4. Multi thread\n";
-        std::cout << "5. Memory-Mapped File (Coming Soon)\n";
-        std::cout << "6. Binary Format Processing (Coming Soon)\n";
-        std::cout << "7. Optimized Multi Thread search\n";
-        std::cout << "8. Exit\n";
+        std::cout << "5. Multi thread Buffered File Read\n";
+        std::cout << "6. Multi thread Buffered File Read and Vector memory reserve\n";
+        std::cout << "7. Memory-Mapped File (Coming Soon)\n";
+        std::cout << "8. Binary Format Processing (Coming Soon)\n";
+        std::cout << "9. Optimized Multi Thread search\n";
+        std::cout << "10. Exit\n";
         std::cout << "=====================================================\n";
         std::cout << "Select processing method: ";
 
         int choice;
         std::cin >> choice;
 
-        if (choice == 8) {
+        if (choice == 10) {
             std::cout << "Exiting program. Goodbye!\n";
             break;
         }
@@ -96,14 +100,26 @@ int main() {
                 break;
 
             case 5:
-                std::cout << "\nMemory-Mapped File Processing is not implemented yet.\n";
+                std::cout << "\nUsing Multi-threaded Buffered File Read Parsing...\n";
+                processor = std::make_unique<ProcessorUsingBufferedFileReadThreads>();
+                runProcessor(processor);
                 break;
 
             case 6:
-                std::cout << "\nBinary Format Processing is not implemented yet.\n";
+                std::cout << "\nUsing Multi-threaded Buffered File Read and Vector reserve Parsing...\n";
+                processor = std::make_unique<ProcessorUsingBufferedFileReadVectorReserveThreads>();
+                runProcessor(processor);
                 break;
 
             case 7:
+                std::cout << "\nMemory-Mapped File Processing is not implemented yet.\n";
+                break;
+
+            case 8:
+                std::cout << "\nBinary Format Processing is not implemented yet.\n";
+                break;
+
+            case 9:
                 std::cout << "\nOptimized Multi Thread search...\n";
                 processor = std::make_unique<OptimalProcessorUsingThreads>();
                 runProcessor(processor);

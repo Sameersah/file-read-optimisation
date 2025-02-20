@@ -26,11 +26,14 @@ add_executable(file_read_optimisation
     src/SequentialProcessor/IfStreamProcessor/ProcessorUsingIfStream.cpp
     src/SequentialProcessor/BufferedFileReadProcessor/ProcessorUsingBufferedFileRead.h
     src/SequentialProcessor/BufferedFileReadProcessor/ProcessorUsingBufferedFileRead.cpp
-    src/ParallelProcessor/ProcessorUsingThreads.h
-    src/ParallelProcessor/ProcessorUsingThreads.cpp
-    src/SequentialProcessor/BufferedFileReadProcessor/ProcessorUsingBufferedFileRead.cpp
     src/SequentialProcessor/BufferedFileReadVectorReserveProcessor/ProcessorUsingBufferedFileReadVectorReserve.h
     src/SequentialProcessor/BufferedFileReadVectorReserveProcessor/ProcessorUsingBufferedFileReadVectorReserve.cpp
+    src/ParallelProcessor/Experiment1-Threads/ProcessorUsingThreads.h
+    src/ParallelProcessor/Experiment1-Threads/ProcessorUsingThreads.cpp
+    src/ParallelProcessor/Experiment2-BufferedRead/ParallelBufferRead.h
+    src/ParallelProcessor/Experiment2-BufferedRead/ParallelBufferRead.cpp
+    src/ParallelProcessor/Experiment3-VectorReserve/ParallelVectorReserve.h
+    src/ParallelProcessor/Experiment3-VectorReserve/ParallelVectorReserve.cpp
     src/OptimalProcessor/IfStreamProcessor/OptimalProcessorUsingThreads.h
     src/OptimalProcessor/IfStreamProcessor/OptimalProcessorUsingThreads.cpp
 )
