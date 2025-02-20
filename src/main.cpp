@@ -10,6 +10,7 @@
 #include "OptimalProcessor/Experiment2BufferRead/OptimalBufferRead.h"
 #include "OptimalProcessor/Experiment3BufferReadVectorReserve/OptimalVectorReserve.h"
 #include "OptimalProcessor/Experiment4BufferReadVectorReserveThreadLocalBuffer/ProcessorUsingThreadLocalBuffer.h"
+#include "OptimalProcessor/Experiment5BufferReadVectorReserveThreadLocalPartialRead/ProcessorUsingPartialRead.h"
 
 
 void runProcessor(std::unique_ptr<ICrashDataProcessor>& processor) {
@@ -68,15 +69,16 @@ int main() {
         std::cout << "11. Optimized Multi Thread Processor- Object of Arrays, buffer file read and vector memory reserve\n";
         std::cout << "12. Optimized Multi Thread Processor- Object of Arrays, buffer file read, vector memory reserve "
                      "and thread local buffer\n";
-
-        std::cout << "13. Exit\n";
+        std::cout << "13. Optimized Multi Thread Processor- Object of Arrays, buffer file read, vector memory reserve "
+                     ",thread local buffer and partial file read\n";
+        std::cout << "14. Exit\n";
         std::cout << "=====================================================\n";
         std::cout << "Select processing method: ";
 
         int choice;
         std::cin >> choice;
 
-        if (choice == 13) {
+        if (choice == 14) {
             std::cout << "Exiting program. Goodbye!\n";
             break;
         }
@@ -150,6 +152,13 @@ int main() {
                 std::cout << "\nOptimized Multi Thread Processor- Object of Arrays, buffer file read,vector memory reserve "
                      "and thread local buffer\n";
             processor = std::make_unique<ProcessorUsingThreadLocalBuffer>();
+            runProcessor(processor);
+            break;
+
+            case 13:
+                std::cout << "\nOptimized Multi Thread Processor- Object of Arrays, buffer file read,vector memory reserve "
+                     " , thread local buffer and partial file read\n";
+            processor = std::make_unique<ProcessorUsingPartialRead>();
             runProcessor(processor);
             break;
 
