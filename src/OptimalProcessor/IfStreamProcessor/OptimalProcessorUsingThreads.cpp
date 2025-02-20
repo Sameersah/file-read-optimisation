@@ -1,4 +1,4 @@
-#include "ProcessorUsingThreads.h"
+#include "OptimalProcessorUsingThreads.h"
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -8,7 +8,7 @@
 #include <mutex>
 #include <omp.h>
 
-void ProcessorUsingThreads::loadData(const std::string& filename) {
+void OptimalProcessorUsingThreads::loadData(const std::string& filename) {
     auto start = std::chrono::high_resolution_clock::now();
     std::ifstream file(filename);
     if (!file.is_open()) {
@@ -56,8 +56,12 @@ void ProcessorUsingThreads::loadData(const std::string& filename) {
 
         #pragma omp critical
         {
-            records.push_back(record);
-            dateIndex[record.crash_date].push_back(record);
+            // records.push_back(record);
+            crash_dates.push_back(record.crash_date);
+            persons_injured.push_back(record.persons_injured);
+            latitudes.push_back(record.latitude);
+            longitudes.push_back(record.longitude);
+            // dateIndex[record.crash_date].push_back(record);
         }
     }
 
@@ -67,16 +71,17 @@ void ProcessorUsingThreads::loadData(const std::string& filename) {
 }
 
 // Multi-threaded search for date range
-int ProcessorUsingThreads::getCrashesInDateRange(const std::string& start_date, const std::string& end_date) {
+int OptimalProcessorUsingThreads::getCrashesInDateRange(const std::string& start_date, const std::string& end_date) {
     auto start = std::chrono::high_resolution_clock::now();
+    // std::vector<CrashRecord> filtered_crashes;
     int crash_count = 0;
-
     #pragma omp parallel for reduction(+:crash_count)
-    for (size_t i = 0; i < records.size(); i++) {
-        if (records[i].crash_date >= start_date && records[i].crash_date <= end_date) {
+    for (size_t i = 0; i < crash_dates.size(); i++) {
+        if (crash_dates[i] >= start_date && crash_dates[i] <= end_date) {
             crash_count++;
         }
     }
+
 
     auto end = std::chrono::high_resolution_clock::now();
     date_range_Searching_duration = end - start;
@@ -84,13 +89,14 @@ int ProcessorUsingThreads::getCrashesInDateRange(const std::string& start_date, 
 }
 
 // Multi-threaded search for injury count range
-int ProcessorUsingThreads::getCrashesByInjuryCountRange(int min_injuries, int max_injuries) {
+int OptimalProcessorUsingThreads::getCrashesByInjuryCountRange(int min_injuries, int max_injuries) {
     auto start = std::chrono::high_resolution_clock::now();
+    // std::vector<CrashRecord> filtered_crashes;
     int crash_count = 0;
 
     #pragma omp parallel for reduction(+:crash_count)
-    for (size_t i = 0; i < records.size(); i++) {
-        if (records[i].persons_injured >= min_injuries && records[i].persons_injured <= max_injuries) {
+    for (size_t i = 0; i < persons_injured.size(); i++) {
+        if (persons_injured[i] >= min_injuries && persons_injured[i] <= max_injuries) {
             crash_count++;
         }
     }
@@ -101,13 +107,14 @@ int ProcessorUsingThreads::getCrashesByInjuryCountRange(int min_injuries, int ma
 }
 
 // Multi-threaded search for location range
-int ProcessorUsingThreads::getCrashesByLocationRange(float lat, float lon, float radius) {
+int OptimalProcessorUsingThreads::getCrashesByLocationRange(float lat, float lon, float radius) {
     auto start = std::chrono::high_resolution_clock::now();
+    // std::vector<CrashRecord> filtered_crashes;
     int crash_count = 0;
 
     #pragma omp parallel for reduction(+:crash_count)
-    for (size_t i = 0; i < records.size(); i++) {
-        float dist = std::sqrt(std::pow(records[i].latitude - lat, 2) + std::pow(records[i].longitude - lon, 2));
+    for (size_t i = 0; i < latitudes.size(); i++) {
+        float dist = std::sqrt(std::pow(latitudes[i] - lat, 2) + std::pow(longitudes[i] - lon, 2));
         if (dist <= radius) {
             crash_count++;
         }

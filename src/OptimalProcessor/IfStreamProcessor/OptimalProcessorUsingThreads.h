@@ -1,7 +1,7 @@
-#ifndef PROCESSOR_USING_THREADS_H
-#define PROCESSOR_USING_THREADS_H
+#ifndef OPTIMAL_PROCESSOR_USING_THREADS_H
+#define OPTIMAL_PROCESSOR_USING_THREADS_H
 
-#include "../ICrashDataProcessor.h"
+#include "../../ICrashDataProcessor.h"
 #include <unordered_map>
 #include <iostream>
 #include <vector>
@@ -10,9 +10,12 @@
 
 struct CrashRecord;
 
-class ProcessorUsingThreads : public ICrashDataProcessor {
+class OptimalProcessorUsingThreads : public ICrashDataProcessor {
 private:
-    std::vector<CrashRecord> records;
+    std::vector<std::string> crash_dates;
+    std::vector<int> persons_injured;
+    std::vector<float> latitudes;
+    std::vector<float> longitudes;
     std::unordered_map<std::string, std::vector<CrashRecord>> dateIndex;
     std::chrono::duration<double> data_load_duration = {};
     std::chrono::duration<double> date_range_Searching_duration = {};
@@ -35,4 +38,4 @@ public:
     [[nodiscard]] std::chrono::duration<double> getLocationRangeSearchingDuration() const override { return location_range_Searching_duration; }
 };
 
-#endif // PROCESSOR_USING_THREADS_H
+#endif // OPTIMAL_PROCESSOR_USING_THREADS_H

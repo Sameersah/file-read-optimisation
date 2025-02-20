@@ -123,9 +123,9 @@ void ProcessorUsingBufferedFileReadVectorReserve::processLine(const std::string&
 }
 
 
-std::vector<CrashRecord> ProcessorUsingBufferedFileReadVectorReserve::getCrashesInDateRange(const std::string& start_date, const std::string& end_date)  {
+int ProcessorUsingBufferedFileReadVectorReserve::getCrashesInDateRange(const std::string& start_date, const std::string& end_date)  {
     auto start = std::chrono::high_resolution_clock::now();
-    std::vector<CrashRecord> filtered_crashes;
+    int crash_count = 0;
     std::tm start_tm = {}, end_tm = {};
     std::istringstream ss_start(start_date);
     std::istringstream ss_end(end_date);
@@ -150,30 +150,30 @@ std::vector<CrashRecord> ProcessorUsingBufferedFileReadVectorReserve::getCrashes
         time_t record_time = std::mktime(&record_tm);
 
         if (record_time >= start_time && record_time <= end_time) {
-            filtered_crashes.push_back(record);
+            crash_count++;
         }
     }
     //benchmarking
     auto end = std::chrono::high_resolution_clock::now();
     date_range_Searching_duration = end - start;
-    return filtered_crashes;
+    return crash_count;
 }
 
-std::vector<CrashRecord> ProcessorUsingBufferedFileReadVectorReserve::getCrashesByInjuryCountRange(int min_injuries, int max_injuries)  {
+int ProcessorUsingBufferedFileReadVectorReserve::getCrashesByInjuryCountRange(int min_injuries, int max_injuries)  {
     auto start = std::chrono::high_resolution_clock::now();
-    std::vector<CrashRecord> filtered_crashes;
+    int crash_count = 0;
     for (const auto& record : records) {
         if (record.persons_injured >= min_injuries && record.persons_injured <= max_injuries) {
-            filtered_crashes.push_back(record);
+            crash_count++;
         }
     }
     // Benchmarking
     auto end = std::chrono::high_resolution_clock::now();
     injury_range_Searching_duration = end - start;
-    return filtered_crashes;
+    return crash_count;
 }
 
-std::vector<CrashRecord> ProcessorUsingBufferedFileReadVectorReserve::getCrashesByLocationRange(float lat, float lon, float radius)  {
+int ProcessorUsingBufferedFileReadVectorReserve::getCrashesByLocationRange(float lat, float lon, float radius)  {
     return {};
 }
 

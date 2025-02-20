@@ -4,6 +4,7 @@
 #include "SequentialProcessor/BufferedFileReadProcessor/ProcessorUsingBufferedFileRead.h"
 #include "SequentialProcessor/BufferedFileReadVectorReserveProcessor/ProcessorUsingBufferedFileReadVectorReserve.h"
 #include "ParallelProcessor/ProcessorUsingThreads.h"
+#include "OptimalProcessor/IfStreamProcessor/OptimalProcessorUsingThreads.h"
 
 void runProcessor(std::unique_ptr<ICrashDataProcessor>& processor) {
     std::string filename = "../motor_vehicle_collisions.csv";
@@ -18,8 +19,8 @@ void runProcessor(std::unique_ptr<ICrashDataProcessor>& processor) {
     std::cout << "Enter end date (MM/DD/YYYY): ";
     std::cin >> end_date;
 
-    auto crashes = processor->getCrashesInDateRange(start_date, end_date);
-    std::cout << "Number of crashes in date range: " << crashes.size() << std::endl;
+    int total_crashes = processor->getCrashesInDateRange(start_date, end_date);
+    std::cout << "Number of crashes in date range: " << total_crashes << std::endl;
     std::cout << "Date range searching duration: " << processor->getDateRangeSearchingDuration().count() << " seconds" << std::endl;
 
     int min_injuries, max_injuries;
@@ -28,8 +29,8 @@ void runProcessor(std::unique_ptr<ICrashDataProcessor>& processor) {
     std::cout << "Enter maximum injuries: ";
     std::cin >> max_injuries;
 
-    crashes = processor->getCrashesByInjuryCountRange(min_injuries, max_injuries);
-    std::cout << "Number of crashes in injury count range: " << crashes.size() << std::endl;
+    total_crashes = processor->getCrashesByInjuryCountRange(min_injuries, max_injuries);
+    std::cout << "Number of crashes in injury count range: " << total_crashes << std::endl;
     std::cout << "Injury count range searching duration: " << processor->getInjuryRangeSearchingDuration().count() << " seconds" << std::endl;
 
     float lat, lon, radius;
@@ -40,8 +41,8 @@ void runProcessor(std::unique_ptr<ICrashDataProcessor>& processor) {
     std::cout << "Enter radius (km): ";
     std::cin >> radius;
 
-    crashes = processor->getCrashesByLocationRange(lat, lon, radius);
-    std::cout << "Number of crashes in location range: " << crashes.size() << std::endl;
+    total_crashes = processor->getCrashesByLocationRange(lat, lon, radius);
+    std::cout << "Number of crashes in location range: " << total_crashes << std::endl;
     std::cout << "Location range searching duration: " << processor->getLocationRangeSearchingDuration().count() << " seconds" << std::endl;
 }
 
@@ -54,14 +55,15 @@ int main() {
         std::cout << "4. Multi thread\n";
         std::cout << "5. Memory-Mapped File (Coming Soon)\n";
         std::cout << "6. Binary Format Processing (Coming Soon)\n";
-        std::cout << "7. Exit\n";
+        std::cout << "7. Optimized Multi Thread search\n";
+        std::cout << "8. Exit\n";
         std::cout << "=====================================================\n";
         std::cout << "Select processing method: ";
 
         int choice;
         std::cin >> choice;
 
-        if (choice == 7) {
+        if (choice == 8) {
             std::cout << "Exiting program. Goodbye!\n";
             break;
         }
@@ -99,6 +101,12 @@ int main() {
 
             case 6:
                 std::cout << "\nBinary Format Processing is not implemented yet.\n";
+                break;
+
+            case 7:
+                std::cout << "\nOptimized Multi Thread search...\n";
+                processor = std::make_unique<OptimalProcessorUsingThreads>();
+                runProcessor(processor);
                 break;
 
             default:

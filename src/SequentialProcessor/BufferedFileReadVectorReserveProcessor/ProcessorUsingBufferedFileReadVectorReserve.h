@@ -29,9 +29,9 @@ public:
     void processLine(const std::string& filename) ;
 
     // APIs for range-based searching
-    [[nodiscard]] std::vector<CrashRecord> getCrashesInDateRange(const std::string& start_date, const std::string& end_date)  override;
-    [[nodiscard]] std::vector<CrashRecord> getCrashesByInjuryCountRange(int min_injuries, int max_injuries)  override;
-    [[nodiscard]] std::vector<CrashRecord> getCrashesByLocationRange(float lat, float lon, float radius)  override;
+    [[nodiscard]] int getCrashesInDateRange(const std::string& start_date, const std::string& end_date)  override;
+    [[nodiscard]] int getCrashesByInjuryCountRange(int min_injuries, int max_injuries)  override;
+    [[nodiscard]] int getCrashesByLocationRange(float lat, float lon, float radius)  override;
 
     // Getters
     [[nodiscard]] std::chrono::duration<double> getDataLoadDuration() const override;

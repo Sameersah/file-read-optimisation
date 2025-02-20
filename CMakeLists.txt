@@ -31,6 +31,8 @@ add_executable(file_read_optimisation
     src/SequentialProcessor/BufferedFileReadProcessor/ProcessorUsingBufferedFileRead.cpp
     src/SequentialProcessor/BufferedFileReadVectorReserveProcessor/ProcessorUsingBufferedFileReadVectorReserve.h
     src/SequentialProcessor/BufferedFileReadVectorReserveProcessor/ProcessorUsingBufferedFileReadVectorReserve.cpp
+    src/OptimalProcessor/IfStreamProcessor/OptimalProcessorUsingThreads.h
+    src/OptimalProcessor/IfStreamProcessor/OptimalProcessorUsingThreads.cpp
 )
 
 # Manually link OpenMP

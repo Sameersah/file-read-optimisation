@@ -17,9 +17,9 @@ public:
     virtual void loadData(const std::string& filename) = 0;
 
     // APIs for range based searching
-    [[nodiscard]] virtual std::vector<CrashRecord> getCrashesInDateRange(const std::string& start_date, const std::string& end_date) = 0;
-    [[nodiscard]] virtual std::vector<CrashRecord> getCrashesByInjuryCountRange(int min_injuries, int max_injuries) = 0;
-    [[nodiscard]] virtual std::vector<CrashRecord> getCrashesByLocationRange(float lat, float lon, float radius) = 0;
+    [[nodiscard]] virtual int getCrashesInDateRange(const std::string& start_date, const std::string& end_date) = 0;
+    [[nodiscard]] virtual int getCrashesByInjuryCountRange(int min_injuries, int max_injuries) = 0;
+    [[nodiscard]] virtual int getCrashesByLocationRange(float lat, float lon, float radius) = 0;
 
     [[nodiscard]] virtual std::chrono::duration<double> getDataLoadDuration() const = 0;
     [[nodiscard]] virtual std::chrono::duration<double> getDateRangeSearchingDuration() const = 0;
