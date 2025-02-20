@@ -118,7 +118,7 @@ void ProcessorUsingBufferedFileReadVectorReserve::processLine(const std::string&
     {
         std::lock_guard<std::mutex> lock(std::mutex);
         records.push_back(record);
-        dateIndex[record.crash_date].push_back(record);
+        // dateIndex[record.crash_date].push_back(record);
     }
 }
 

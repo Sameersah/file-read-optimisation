@@ -7,6 +7,8 @@
 #include "ParallelProcessor/Experiment2-BufferedRead/ParallelBufferRead.h"
 #include "ParallelProcessor/Experiment3-VectorReserve/ParallelVectorReserve.h"
 #include "OptimalProcessor/IfStreamProcessor/OptimalProcessorUsingThreads.h"
+#include "OptimalProcessor/Experiment2-BufferRead/OptimalBufferRead.h"
+#include "OptimalProcessor/Experiment3-VectorReserve/OptimalVectorReserve.h"
 
 void runProcessor(std::unique_ptr<ICrashDataProcessor>& processor) {
     std::string filename = "../motor_vehicle_collisions.csv";
@@ -60,14 +62,16 @@ int main() {
         std::cout << "7. Memory-Mapped File (Coming Soon)\n";
         std::cout << "8. Binary Format Processing (Coming Soon)\n";
         std::cout << "9. Optimized Multi Thread search\n";
-        std::cout << "10. Exit\n";
+        std::cout << "10. Optimized Multi Thread search\n";
+        std::cout << "11. Optimized Multi Thread buffer file read and vector memory reserve\n";
+        std::cout << "12. Exit\n";
         std::cout << "=====================================================\n";
         std::cout << "Select processing method: ";
 
         int choice;
         std::cin >> choice;
 
-        if (choice == 10) {
+        if (choice == 12) {
             std::cout << "Exiting program. Goodbye!\n";
             break;
         }
@@ -122,6 +126,18 @@ int main() {
             case 9:
                 std::cout << "\nOptimized Multi Thread search...\n";
                 processor = std::make_unique<OptimalProcessorUsingThreads>();
+                runProcessor(processor);
+                break;
+            
+            case 10:
+                std::cout << "\nOptimized Multi Thread using buffer search...\n";
+                processor = std::make_unique<OptimalBufferRead>();
+                runProcessor(processor);
+                break;
+            
+            case 11:
+                std::cout << "\nOptimized Multi Thread using buffer file read and vector memory reserve...\n";
+                processor = std::make_unique<OptimalVectorReserve>();
                 runProcessor(processor);
                 break;
 

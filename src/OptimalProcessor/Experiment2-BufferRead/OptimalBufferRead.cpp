@@ -1,4 +1,4 @@
-#include "ParallelBufferRead.h"
+#include "OptimalBufferRead.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -12,7 +12,7 @@
 
 // std::mutex records_mutex;
 
-void ProcessorUsingBufferedFileReadThreads::loadData(const std::string& filename) {
+void OptimalBufferRead::loadData(const std::string& filename) {
     auto start = std::chrono::high_resolution_clock::now();
 
     std::ifstream file(filename, std::ios::in | std::ios::binary);
@@ -54,7 +54,7 @@ void ProcessorUsingBufferedFileReadThreads::loadData(const std::string& filename
     data_load_duration = end - start;
 }
 
-void ProcessorUsingBufferedFileReadThreads::processLinesParallel(const std::vector<std::string>& lines) {
+void OptimalBufferRead::processLinesParallel(const std::vector<std::string>& lines) {
     int num_threads = std::thread::hardware_concurrency();
     std::cout << "Using " << num_threads << " threads for parallel processing.\n";
 
@@ -93,19 +93,23 @@ void ProcessorUsingBufferedFileReadThreads::processLinesParallel(const std::vect
         #pragma omp critical
         {
             std::lock_guard<std::mutex> lock(std::mutex);
-            records.push_back(record);
+            // records.push_back(record);
+            crash_dates.push_back(record.crash_date);
+            persons_injured.push_back(record.persons_injured);
+            latitudes.push_back(record.latitude);
+            longitudes.push_back(record.longitude);
             // dateIndex[record.crash_date].push_back(record);
         }
     }
 }
 
-int ProcessorUsingBufferedFileReadThreads::getCrashesInDateRange(const std::string& start_date, const std::string& end_date) {
+int OptimalBufferRead::getCrashesInDateRange(const std::string& start_date, const std::string& end_date) {
     auto start = std::chrono::high_resolution_clock::now();
     int crash_count = 0;
 
     #pragma omp parallel for reduction(+:crash_count)
-    for (size_t i = 0; i < records.size(); i++) {
-        if (records[i].crash_date >= start_date && records[i].crash_date <= end_date) {
+    for (size_t i = 0; i < crash_dates.size(); i++) {
+        if (crash_dates[i] >= start_date && crash_dates[i] <= end_date) {
             crash_count++;
         }
     }
@@ -115,13 +119,13 @@ int ProcessorUsingBufferedFileReadThreads::getCrashesInDateRange(const std::stri
     return crash_count;
 }
 
-int ProcessorUsingBufferedFileReadThreads::getCrashesByInjuryCountRange(int min_injuries, int max_injuries) {
+int OptimalBufferRead::getCrashesByInjuryCountRange(int min_injuries, int max_injuries) {
     auto start = std::chrono::high_resolution_clock::now();
     int crash_count = 0;
 
     #pragma omp parallel for reduction(+:crash_count)
-    for (size_t i = 0; i < records.size(); i++) {
-        if (records[i].persons_injured >= min_injuries && records[i].persons_injured <= max_injuries) {
+    for (size_t i = 0; i < persons_injured.size(); i++) {
+        if (persons_injured[i] >= min_injuries && persons_injured[i] <= max_injuries) {
             crash_count++;
         }
     }
@@ -131,13 +135,13 @@ int ProcessorUsingBufferedFileReadThreads::getCrashesByInjuryCountRange(int min_
     return crash_count;
 }
 
-int ProcessorUsingBufferedFileReadThreads::getCrashesByLocationRange(float lat, float lon, float radius) {
+int OptimalBufferRead::getCrashesByLocationRange(float lat, float lon, float radius) {
     auto start = std::chrono::high_resolution_clock::now();
     int crash_count = 0;
 
     #pragma omp parallel for reduction(+:crash_count)
-    for (size_t i = 0; i < records.size(); i++) {
-        float dist = std::sqrt(std::pow(records[i].latitude - lat, 2) + std::pow(records[i].longitude - lon, 2));
+    for (size_t i = 0; i < latitudes.size(); i++) {
+        float dist = std::sqrt(std::pow(latitudes[i] - lat, 2) + std::pow(longitudes[i] - lon, 2));
         if (dist <= radius) {
             crash_count++;
         }
@@ -148,18 +152,18 @@ int ProcessorUsingBufferedFileReadThreads::getCrashesByLocationRange(float lat, 
     return crash_count;
 }
 
-std::chrono::duration<double> ProcessorUsingBufferedFileReadThreads::getDataLoadDuration() const {
+std::chrono::duration<double> OptimalBufferRead::getDataLoadDuration() const {
     return data_load_duration;
 }
 
-std::chrono::duration<double> ProcessorUsingBufferedFileReadThreads::getDateRangeSearchingDuration() const {
+std::chrono::duration<double> OptimalBufferRead::getDateRangeSearchingDuration() const {
     return date_range_Searching_duration;
 }
 
-std::chrono::duration<double> ProcessorUsingBufferedFileReadThreads::getInjuryRangeSearchingDuration() const {
+std::chrono::duration<double> OptimalBufferRead::getInjuryRangeSearchingDuration() const {
     return injury_range_Searching_duration;
 }
 
-std::chrono::duration<double> ProcessorUsingBufferedFileReadThreads::getLocationRangeSearchingDuration() const {
+std::chrono::duration<double> OptimalBufferRead::getLocationRangeSearchingDuration() const {
     return location_range_Searching_duration;
 }

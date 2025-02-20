@@ -57,7 +57,7 @@ void ProcessorUsingThreads::loadData(const std::string& filename) {
         #pragma omp critical
         {
             records.push_back(record);
-            dateIndex[record.crash_date].push_back(record);
+            // dateIndex[record.crash_date].push_back(record);
         }
     }
 

@@ -112,7 +112,7 @@ void ProcessorUsingIfStream::loadData(const std::string& filename) {
         std::getline(ss, record.vehicle_type_code_5, ',');
 
         records.push_back(record);
-        dateIndex[record.crash_date].push_back(record);
+        // dateIndex[record.crash_date].push_back(record);
     }
 
     file.close();
