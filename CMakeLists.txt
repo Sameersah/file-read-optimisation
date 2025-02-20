@@ -34,8 +34,8 @@ add_executable(file_read_optimisation
         src/ParallelProcessor/Experiment2BufferedRead/ParallelBufferRead.cpp
         src/ParallelProcessor/Experiment3BufferReadVectorReserve/ParallelVectorReserve.h
         src/ParallelProcessor/Experiment3BufferReadVectorReserve/ParallelVectorReserve.cpp
-    src/OptimalProcessor/IfStreamProcessor/OptimalProcessorUsingThreads.h
-    src/OptimalProcessor/IfStreamProcessor/OptimalProcessorUsingThreads.cpp
+        src/OptimalProcessor/Experiment1ObjectofArrays/OptimalProcessorUsingThreads.h
+        src/OptimalProcessor/Experiment1ObjectofArrays/OptimalProcessorUsingThreads.cpp
         src/OptimalProcessor/Experiment2BufferRead/OptimalBufferRead.h
         src/OptimalProcessor/Experiment2BufferRead/OptimalBufferRead.cpp
         src/OptimalProcessor/Experiment3BufferReadVectorReserve/OptimalVectorReserve.h
