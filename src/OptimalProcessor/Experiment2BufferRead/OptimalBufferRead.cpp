@@ -106,14 +106,36 @@ void OptimalBufferRead::processLinesParallel(const std::vector<std::string>& lin
 int OptimalBufferRead::getCrashesInDateRange(const std::string& start_date, const std::string& end_date) {
     auto start = std::chrono::high_resolution_clock::now();
     int crash_count = 0;
+    std::tm start_tm = {}, end_tm = {};
+    std::istringstream ss_start(start_date);
+    std::istringstream ss_end(end_date);
+    ss_start >> std::get_time(&start_tm, "%m/%d/%Y");
+    ss_end >> std::get_time(&end_tm, "%m/%d/%Y");
+    if (ss_start.fail() || ss_end.fail()) {
+        std::cerr << "Error: Invalid date format (Expected MM/DD/YYYY)" << std::endl;
+        return {}; // Return empty if parsing fails
+    }
+    time_t start_time = std::mktime(&start_tm);
+    time_t end_time = std::mktime(&end_tm);
 
     #pragma omp parallel for reduction(+:crash_count)
-    for (size_t i = 0; i < crash_dates.size(); i++) {
-        if (crash_dates[i] >= start_date && crash_dates[i] <= end_date) {
+    for (const auto& crash_date : crash_dates) {
+        std::tm record_tm = {};
+        std::istringstream ss_record(crash_date);
+        ss_record >> std::get_time(&record_tm, "%m/%d/%Y");
+
+        if (ss_record.fail()) {
+            std::cerr << "Skipping invalid date format in record: " << crash_date << std::endl;
+            continue; // Skip records with invalid date format
+        }
+
+        time_t record_time = std::mktime(&record_tm);
+
+        if (record_time >= start_time && record_time <= end_time) {
             crash_count++;
         }
     }
-
+    //benchmarking
     auto end = std::chrono::high_resolution_clock::now();
     date_range_Searching_duration = end - start;
     return crash_count;

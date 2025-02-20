@@ -48,7 +48,7 @@ void ProcessorUsingIfStream::loadData(const std::string& filename) {
         try {
         record.persons_injured = token.empty() ? 0 : std::stoi(token);
      } catch (const std::invalid_argument& e) {
-        record.collision_id = 0;
+        record.persons_injured = 0;
     }
 
         std::getline(ss, token, ',');
