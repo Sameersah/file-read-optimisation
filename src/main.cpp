@@ -61,23 +61,21 @@ int main() {
         std::cout << "4. Multi thread Processor\n";
         std::cout << "5. Multi thread Processor- Buffered File Read\n";
         std::cout << "6. Multi thread Processor- Buffered File Read and Vector memory reserve\n";
-        std::cout << "7. Memory-Mapped File (Coming Soon)\n";
-        std::cout << "8. Binary Format Processing (Coming Soon)\n";
-        std::cout << "9. Optimized Multi Thread Processor - object of Arrays\n";
-        std::cout << "10. Optimized Multi Thread Processor - Object of Arrays, Buffer file Read\n";
-        std::cout << "11. Optimized Multi Thread Processor- Object of Arrays, buffer file read and vector memory reserve\n";
-        std::cout << "12. Optimized Multi Thread Processor- Object of Arrays, buffer file read, vector memory reserve "
+        std::cout << "7. Optimized Multi Thread Processor - object of Arrays\n";
+        std::cout << "8. Optimized Multi Thread Processor - Object of Arrays, Buffer file Read\n";
+        std::cout << "9. Optimized Multi Thread Processor- Object of Arrays, buffer file read and vector memory reserve\n";
+        std::cout << "10. Optimized Multi Thread Processor- Object of Arrays, buffer file read, vector memory reserve "
                      "and thread local buffer\n";
-        std::cout << "13. Optimized Multi Thread Processor- Object of Arrays, buffer file read, vector memory reserve "
+        std::cout << "11. Optimized Multi Thread Processor- Object of Arrays, buffer file read, vector memory reserve "
                      ",thread local buffer and partial file read\n";
-        std::cout << "14. Exit\n";
+        std::cout << "12. Exit\n";
         std::cout << "=====================================================\n";
         std::cout << "Select processing method: ";
 
         int choice;
         std::cin >> choice;
 
-        if (choice == 14) {
+        if (choice == 12) {
             std::cout << "Exiting program. Goodbye!\n";
             break;
         }
@@ -121,40 +119,33 @@ int main() {
                 runProcessor(processor);
                 break;
 
+
             case 7:
-                std::cout << "\nMemory-Mapped File Processing is not implemented yet.\n";
-                break;
-
-            case 8:
-                std::cout << "\nBinary Format Processing is not implemented yet.\n";
-                break;
-
-            case 9:
                 std::cout << "\nOptimized Multi Thread search...\n";
                 processor = std::make_unique<OptimalProcessorUsingThreads>();
                 runProcessor(processor);
                 break;
             
-            case 10:
+            case 8:
                 std::cout << "\nOptimized Multi Thread using buffer search...\n";
                 processor = std::make_unique<OptimalBufferRead>();
                 runProcessor(processor);
                 break;
             
-            case 11:
+            case 9:
                 std::cout << "\nOptimized Multi Thread using buffer file read and vector memory reserve...\n";
                 processor = std::make_unique<OptimalVectorReserve>();
                 runProcessor(processor);
                 break;
 
-            case 12:
+            case 10:
                 std::cout << "\nOptimized Multi Thread Processor- Object of Arrays, buffer file read,vector memory reserve "
                      "and thread local buffer\n";
             processor = std::make_unique<ProcessorUsingThreadLocalBuffer>();
             runProcessor(processor);
             break;
 
-            case 13:
+            case 11:
                 std::cout << "\nOptimized Multi Thread Processor- Object of Arrays, buffer file read,vector memory reserve "
                      " , thread local buffer and partial file read\n";
             processor = std::make_unique<ProcessorUsingPartialRead>();
