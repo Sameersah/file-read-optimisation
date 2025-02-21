@@ -8,6 +8,7 @@
 
 struct CrashRecord {
     std::string crash_date;
+    time_t crash_date_epoch;
     std::string crash_time;
     std::string borough;
     std::string zip_code;

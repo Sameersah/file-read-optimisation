@@ -10,6 +10,7 @@
 #include "OptimalProcessor/Experiment3BufferReadVectorReserve/OptimalVectorReserve.h"
 #include "OptimalProcessor/Experiment4BufferReadVectorReserveThreadLocalBuffer/ProcessorUsingThreadLocalBuffer.h"
 #include "OptimalProcessor/Experiment5BufferReadVectorReserveThreadLocalPartialRead/ProcessorUsingPartialRead.h"
+#include "OptimalProcessor/Experiment6BufferReadVectorReserveThreadLocalPartialRead/ProcessorUsingEpochTime.h"
 
 
 void runProcessor(std::unique_ptr<ICrashDataProcessor>& processor) {
@@ -68,14 +69,16 @@ int main() {
                      "and thread local buffer\n";
         std::cout << "11. Optimized Multi Thread Processor- Object of Arrays, buffer file read, vector memory reserve "
                      ",thread local buffer and partial file read\n";
-        std::cout << "12. Exit\n";
+        std::cout << "12. Optimized Multi Thread Processor- Object of Arrays, buffer file read, vector memory reserve "
+                     ",thread local buffer, partial file read and epoch time\n";
+        std::cout << "13. Exit\n";
         std::cout << "=====================================================\n";
         std::cout << "Select processing method: ";
 
         int choice;
         std::cin >> choice;
 
-        if (choice == 12) {
+        if (choice == 13) {
             std::cout << "Exiting program. Goodbye!\n";
             break;
         }
@@ -147,8 +150,15 @@ int main() {
 
             case 11:
                 std::cout << "\nOptimized Multi Thread Processor- Object of Arrays, buffer file read,vector memory reserve "
-                     " , thread local buffer and partial file read\n";
+                     ",thread local buffer and partial file read\n";
             processor = std::make_unique<ProcessorUsingPartialRead>();
+            runProcessor(processor);
+            break;
+
+            case 12:
+                std::cout << "\nOptimized Multi Thread Processor- Object of Arrays, buffer file read,vector memory reserve "
+                     ",thread local buffer,partial file read and epoch time\n";
+            processor = std::make_unique<ProcessorUsingEpochTime>();
             runProcessor(processor);
             break;
 
