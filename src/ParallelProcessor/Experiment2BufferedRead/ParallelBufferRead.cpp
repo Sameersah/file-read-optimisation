@@ -93,6 +93,32 @@ void ProcessorUsingBufferedFileReadThreads::processLinesParallel(const std::vect
         try { record.persons_killed = token.empty() ? 0 : std::stoi(token); }
         catch (...) { record.persons_killed = 0; }
 
+        try { record.cyclists_injured = token.empty() ? 0 : std::stoi(token); }
+        catch (const std::exception&) { record.cyclists_injured = 0; }
+
+        try { record.cyclists_killed = token.empty() ? 0 : std::stoi(token); }
+        catch (const std::exception&) { record.cyclists_killed = 0; }
+
+        try { record.motorists_injured = token.empty() ? 0 : std::stoi(token); }
+        catch (const std::exception&) { record.motorists_injured = 0; }
+
+        try { record.motorists_killed = token.empty() ? 0 : std::stoi(token); }
+        catch (const std::exception&) { record.motorists_killed = 0; }
+
+        std::getline(ss, record.contributing_factor_vehicle_1, ',');
+        std::getline(ss, record.contributing_factor_vehicle_2, ',');
+        std::getline(ss, record.contributing_factor_vehicle_3, ',');
+        std::getline(ss, record.contributing_factor_vehicle_4, ',');
+        std::getline(ss, record.contributing_factor_vehicle_5, ',');
+
+        try { record.collision_id= token.empty() ? 0 : std::stol(token); }
+        catch (const std::exception&) { record.collision_id = 0; }
+        std::getline(ss, record.vehicle_type_code_1, ',');
+        std::getline(ss, record.vehicle_type_code_2, ',');
+        std::getline(ss, record.vehicle_type_code_3, ',');
+        std::getline(ss, record.vehicle_type_code_4, ',');
+        std::getline(ss, record.vehicle_type_code_5, ',');
+
         #pragma omp critical
         {
             std::lock_guard<std::mutex> lock(std::mutex);

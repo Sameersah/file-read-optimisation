@@ -84,14 +84,6 @@ void ProcessorUsingThreads::loadData(const std::string& filename) {
         std::getline(ss, record.vehicle_type_code_4, ',');
         std::getline(ss, record.vehicle_type_code_5, ',');
 
-
-
-
-
-
-
-
-
         #pragma omp critical
         {
             records.push_back(record);
