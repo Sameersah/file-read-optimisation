@@ -109,12 +109,56 @@ void ProcessorUsingThreadLocalBuffer::processLinesParallel(const std::vector<std
             std::getline(ss, token, ',');
             try { record.persons_killed = token.empty() ? 0 : std::stoi(token); }
             catch (...) { record.persons_killed = 0; }
+            try { record.cyclists_injured = token.empty() ? 0 : std::stoi(token); }
+            catch (const std::exception&) { record.cyclists_injured = 0; }
+
+            try { record.cyclists_killed = token.empty() ? 0 : std::stoi(token); }
+            catch (const std::exception&) { record.cyclists_killed = 0; }
+
+            try { record.motorists_injured = token.empty() ? 0 : std::stoi(token); }
+            catch (const std::exception&) { record.motorists_injured = 0; }
+
+            try { record.motorists_killed = token.empty() ? 0 : std::stoi(token); }
+            catch (const std::exception&) { record.motorists_killed = 0; }
+
+            std::getline(ss, record.contributing_factor_vehicle_1, ',');
+            std::getline(ss, record.contributing_factor_vehicle_2, ',');
+            std::getline(ss, record.contributing_factor_vehicle_3, ',');
+            std::getline(ss, record.contributing_factor_vehicle_4, ',');
+            std::getline(ss, record.contributing_factor_vehicle_5, ',');
+
+            try { record.collision_id= token.empty() ? 0 : std::stol(token); }
+            catch (const std::exception&) { record.collision_id = 0; }
+            std::getline(ss, record.vehicle_type_code_1, ',');
+            std::getline(ss, record.vehicle_type_code_2, ',');
+            std::getline(ss, record.vehicle_type_code_3, ',');
+            std::getline(ss, record.vehicle_type_code_4, ',');
+            std::getline(ss, record.vehicle_type_code_5, ',');
 
             // Store data in thread-local vectors
             local_crash_dates.push_back(record.crash_date);
             local_persons_injured.push_back(record.persons_injured);
             local_latitudes.push_back(record.latitude);
             local_longitudes.push_back(record.longitude);
+            crash_time.push_back(record.crash_date);
+            borough.push_back(record.borough);
+            zip_code.push_back(record.zip_code);
+            locations.push_back(record.location);
+            on_street_name.push_back(record.on_street_name);
+            cross_street_name.push_back(record.cross_street_name);
+            off_street_name.push_back(record.off_street_name);
+            contributing_factor_vehicle_1.push_back(record.contributing_factor_vehicle_1);
+            contributing_factor_vehicle_2.push_back(record.contributing_factor_vehicle_2);
+            contributing_factor_vehicle_3.push_back(record.contributing_factor_vehicle_3);
+            contributing_factor_vehicle_4.push_back(record.contributing_factor_vehicle_4);
+            contributing_factor_vehicle_5.push_back(record.contributing_factor_vehicle_5);
+            collision_ids.push_back(record.collision_id);
+            vehicle_type_code_1.push_back(record.vehicle_type_code_1);
+            vehicle_type_code_2.push_back(record.vehicle_type_code_2);
+            vehicle_type_code_3.push_back(record.vehicle_type_code_3);
+            vehicle_type_code_4.push_back(record.vehicle_type_code_4);
+            vehicle_type_code_5.push_back(record.vehicle_type_code_5);
+            vehicle_type_code_6.push_back(record.vehicle_type_code_6);
         }
     }
 
