@@ -107,8 +107,6 @@ void OptimalProcessorUsingThreads::loadData(const std::string& filename) {
             vehicle_type_code_4.push_back(record.vehicle_type_code_4);
             vehicle_type_code_5.push_back(record.vehicle_type_code_5);
             vehicle_type_code_6.push_back(record.vehicle_type_code_6);
-
-
         }
     }
 
