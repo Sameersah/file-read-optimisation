@@ -171,6 +171,33 @@ void ProcessorUsingPartialRead::processFileParallel(char* data, size_t file_size
             float lat = 0.0f, lon = 0.0f;
             int injured = 0;
             std::string crash_date;
+            std::string crash_time;
+            std::string borough;
+            std:: string zip_code;
+            std::string locations;
+            std::string on_street_name;
+            std::string cross_street_name;
+            std::string off_street_name;
+            int number_of_persons_injured = 0;
+            int number_of_persons_killed = 0;
+            int number_of_pedestrians_injured = 0;
+            int number_of_pedestrians_killed = 0;
+            int number_of_cyclists_injured = 0;
+            int number_of_cyclists_killed = 0;
+            int number_of_motorists_injured = 0;
+            int number_of_motorists_killed = 0;
+            std::string contributing_factor_vehicle_1;
+            std::string contributing_factor_vehicle_2;
+            std::string contributing_factor_vehicle_3;
+            std::string contributing_factor_vehicle_4;
+            std::string contributing_factor_vehicle_5;
+            std::string vehicle_type_code_1;
+            std::string vehicle_type_code_2;
+            std::string vehicle_type_code_3;
+            std:: string vehicle_type_code_4;
+            std::string vehicle_type_code_5;
+            std::string vehicle_type_code_6;
+            long collision_id = 0;
 
             while (pos < line.size()) {
                 size_t next_pos = line.find(',', pos);
@@ -179,20 +206,71 @@ void ProcessorUsingPartialRead::processFileParallel(char* data, size_t file_size
                 pos = next_pos + 1;
 
                 switch (col_index) {
-                    case 0: crash_date = std::string(token); break;  // crash_date
-                    case 4: try { lat = std::stof(std::string(token)); } catch (...) { lat = 0.0f; } break; // latitude
-                    case 5: try { lon = std::stof(std::string(token)); } catch (...) { lon = 0.0f; } break; // longitude
-                    case 10: try { injured = std::stoi(std::string(token)); } catch (...) { injured = 0; } break; // persons_injured
+                    case 0: crash_date = std::string(token); break;
+                    case 1: crash_time = std::string(token); break;
+                    case 2: borough = std::string(token); break;
+                    case 3: zip_code = std::string(token); break;
+                    case 4: try { lat = std::stof(std::string(token)); } catch (...) { lat = 0.0f; } break;
+                    case 5: try { lon = std::stof(std::string(token)); } catch (...) { lon = 0.0f; } break;
+                    case 6: locations = std::string(token); break;
+                    case 7: on_street_name = std::string(token); break;
+                    case 8: cross_street_name = std::string(token); break;
+                    case 9: off_street_name = std::string(token); break;
+                    case 10: try {
+                        number_of_persons_injured = std::stoi(std::string(token));
+                    } catch (...) {
+                        number_of_persons_injured = 0;
+                    } break;
+                    case 11: try { number_of_persons_killed = std::stoi(std::string(token)); } catch (...) { number_of_persons_killed = 0; } break;
+                    case 12: try { number_of_pedestrians_injured = std::stoi(std::string(token)); } catch (...) { number_of_pedestrians_injured = 0; } break;
+                    case 13: try { number_of_pedestrians_killed = std::stoi(std::string(token)); } catch (...) { number_of_pedestrians_killed = 0; } break;
+                    case 14: try { number_of_cyclists_injured = std::stoi(std::string(token)); } catch (...) { number_of_cyclists_injured = 0; } break;
+                    case 15: try { number_of_cyclists_killed = std::stoi(std::string(token)); } catch (...) { number_of_cyclists_killed = 0; } break;
+                    case 16: try { number_of_motorists_injured = std::stoi(std::string(token)); } catch (...) { number_of_motorists_injured = 0; } break;
+                    case 17: try { number_of_motorists_killed = std::stoi(std::string(token)); } catch (...) { number_of_motorists_killed = 0; } break;
+                    case 18: contributing_factor_vehicle_1 = std::string(token); break;
+                    case 19: contributing_factor_vehicle_2 = std::string(token); break;
+                    case 20: contributing_factor_vehicle_3 = std::string(token); break;
+                    case 21: contributing_factor_vehicle_4 = std::string(token); break;
+                    case 22: contributing_factor_vehicle_5 = std::string(token); break;
+                    case 23: try { collision_id = std::stol(std::string(token)); } catch (...) { collision_id = 0; } break;
+                    case 24: vehicle_type_code_1 = std::string(token); break;
+                    case 25: vehicle_type_code_2 = std::string(token); break;
+                    case 26: vehicle_type_code_3 = std::string(token); break;
+                    case 27: vehicle_type_code_4 = std::string(token); break;
+                    case 28: vehicle_type_code_5 = std::string(token); break;
+                    case 29: vehicle_type_code_6 = std::string(token); break;
+                    case 30: try { injured = std::stoi(std::string(token)); } catch (...) { injured = 0; } break;
                 }
 
                 col_index++;
-                if (col_index > 10) break; // Only process required columns
+                if (col_index > 30) break; // Only process required columns
             }
 
             local_crash_dates.push_back(crash_date);
             local_latitudes.push_back(lat);
             local_longitudes.push_back(lon);
             local_persons_injured.push_back(injured);
+            local_crash_time.push_back(crash_time);
+            local_borough.push_back(borough);
+            local_zip_code.push_back(zip_code);
+            local_locations.push_back(locations);
+            local_on_street_name.push_back(on_street_name);
+            local_cross_street_name.push_back(cross_street_name);
+            local_off_street_name.push_back(off_street_name);
+            local_contributing_factor_vehicle_1.push_back(contributing_factor_vehicle_1);
+            local_contributing_factor_vehicle_2.push_back(contributing_factor_vehicle_2);
+            local_contributing_factor_vehicle_3.push_back(contributing_factor_vehicle_3);
+            local_contributing_factor_vehicle_4.push_back(contributing_factor_vehicle_4);
+            local_contributing_factor_vehicle_5.push_back(std::string(contributing_factor_vehicle_5));
+            local_collision_ids.push_back(collision_id);
+            local_vehicle_type_code_1.push_back(std::string(vehicle_type_code_1));
+            local_vehicle_type_code_2.push_back(std::string(vehicle_type_code_2));
+            local_vehicle_type_code_3.push_back(std::string(vehicle_type_code_3));
+            local_vehicle_type_code_4.push_back(std::string(vehicle_type_code_4));
+            local_vehicle_type_code_5.push_back(std::string(vehicle_type_code_5));
+            local_vehicle_type_code_6.push_back(std::string(vehicle_type_code_6));
+
         }
     }
 
