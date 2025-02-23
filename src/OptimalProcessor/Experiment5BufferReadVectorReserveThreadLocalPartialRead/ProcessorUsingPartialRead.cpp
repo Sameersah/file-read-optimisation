@@ -43,7 +43,7 @@ void ProcessorUsingPartialRead::loadData(const std::string& filename) {
 
     // Estimate record count based on file size (assumption: ~100 bytes per record)
     size_t estimated_records = file_size / 100;
-    crash_dates.reserve(estimated_records);
+    /*crash_dates.reserve(estimated_records);
     persons_injured.reserve(estimated_records);
     latitudes.reserve(estimated_records);
     longitudes.reserve(estimated_records);
@@ -65,7 +65,7 @@ void ProcessorUsingPartialRead::loadData(const std::string& filename) {
     vehicle_type_code_3.reserve(estimated_records);
     vehicle_type_code_4.reserve(estimated_records);
     vehicle_type_code_5.reserve(estimated_records);
-    vehicle_type_code_6.reserve(estimated_records);
+    vehicle_type_code_6.reserve(estimated_records);*/
 
 
 
