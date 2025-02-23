@@ -69,6 +69,26 @@ void ProcessorUsingThreadLocalBuffer::processLinesParallel(const std::vector<std
     std::vector<std::vector<int>> persons_injured_local(num_threads);
     std::vector<std::vector<float>> latitudes_local(num_threads);
     std::vector<std::vector<float>> longitudes_local(num_threads);
+    std::vector<std::vector<std::string>> crash_time_local(num_threads);
+    std::vector<std::vector<std::string>> borough_local(num_threads);
+    std::vector<std::vector<std::string>> zip_code_local(num_threads);
+    std::vector<std::vector<std::string>> locations_local(num_threads);
+    std::vector<std::vector<std::string>> on_street_name_local(num_threads);
+    std::vector<std::vector<std::string>> cross_street_name_local(num_threads);
+    std::vector<std::vector<std::string>> off_street_name_local(num_threads);
+    std::vector<std::vector<std::string>> contributing_factor_vehicle_1_local(num_threads);
+    std::vector<std::vector<std::string>> contributing_factor_vehicle_2_local(num_threads);
+    std::vector<std::vector<std::string>> contributing_factor_vehicle_3_local(num_threads);
+    std::vector<std::vector<std::string>> contributing_factor_vehicle_4_local(num_threads);
+    std::vector<std::vector<std::string>> contributing_factor_vehicle_5_local(num_threads);
+    std::vector<std::vector<long>> collision_ids_local(num_threads);
+    std::vector<std::vector<std::string>> vehicle_type_code_1_local(num_threads);
+    std::vector<std::vector<std::string>> vehicle_type_code_2_local(num_threads);
+    std::vector<std::vector<std::string>> vehicle_type_code_3_local(num_threads);
+    std::vector<std::vector<std::string>> vehicle_type_code_4_local(num_threads);
+    std::vector<std::vector<std::string>> vehicle_type_code_5_local(num_threads);
+    std::vector<std::vector<std::string>> vehicle_type_code_6_local(num_threads);
+
 
     #pragma omp parallel num_threads(num_threads)
     {
@@ -77,6 +97,26 @@ void ProcessorUsingThreadLocalBuffer::processLinesParallel(const std::vector<std
         auto& local_persons_injured = persons_injured_local[thread_id];
         auto& local_latitudes = latitudes_local[thread_id];
         auto& local_longitudes = longitudes_local[thread_id];
+        auto& local_crash_time = crash_time_local[thread_id];
+        auto& local_borough = borough_local[thread_id];
+        auto& local_zip_code = zip_code_local[thread_id];
+        auto& local_locations = locations_local[thread_id];
+        auto& local_on_street_name = on_street_name_local[thread_id];
+        auto& local_cross_street_name = cross_street_name_local[thread_id];
+        auto& local_off_street_name = off_street_name_local[thread_id];
+        auto& local_contributing_factor_vehicle_1 = contributing_factor_vehicle_1_local[thread_id];
+        auto& local_contributing_factor_vehicle_2 = contributing_factor_vehicle_2_local[thread_id];
+        auto& local_contributing_factor_vehicle_3 = contributing_factor_vehicle_3_local[thread_id];
+        auto& local_contributing_factor_vehicle_4 = contributing_factor_vehicle_4_local[thread_id];
+        auto& local_contributing_factor_vehicle_5 = contributing_factor_vehicle_5_local[thread_id];
+        auto& local_collision_ids = collision_ids_local[thread_id];
+        auto& local_vehicle_type_code_1 = vehicle_type_code_1_local[thread_id];
+        auto& local_vehicle_type_code_2 = vehicle_type_code_2_local[thread_id];
+        auto& local_vehicle_type_code_3 = vehicle_type_code_3_local[thread_id];
+        auto& local_vehicle_type_code_4 = vehicle_type_code_4_local[thread_id];
+        auto& local_vehicle_type_code_5 = vehicle_type_code_5_local[thread_id];
+        auto& local_vehicle_type_code_6 = vehicle_type_code_6_local[thread_id];
+
 
         #pragma omp for
         for (size_t i = 0; i < lines.size(); i++) {
@@ -140,25 +180,26 @@ void ProcessorUsingThreadLocalBuffer::processLinesParallel(const std::vector<std
             local_persons_injured.push_back(record.persons_injured);
             local_latitudes.push_back(record.latitude);
             local_longitudes.push_back(record.longitude);
-            crash_time.push_back(record.crash_date);
-            borough.push_back(record.borough);
-            zip_code.push_back(record.zip_code);
-            locations.push_back(record.location);
-            on_street_name.push_back(record.on_street_name);
-            cross_street_name.push_back(record.cross_street_name);
-            off_street_name.push_back(record.off_street_name);
-            contributing_factor_vehicle_1.push_back(record.contributing_factor_vehicle_1);
-            contributing_factor_vehicle_2.push_back(record.contributing_factor_vehicle_2);
-            contributing_factor_vehicle_3.push_back(record.contributing_factor_vehicle_3);
-            contributing_factor_vehicle_4.push_back(record.contributing_factor_vehicle_4);
-            contributing_factor_vehicle_5.push_back(record.contributing_factor_vehicle_5);
-            collision_ids.push_back(record.collision_id);
-            vehicle_type_code_1.push_back(record.vehicle_type_code_1);
-            vehicle_type_code_2.push_back(record.vehicle_type_code_2);
-            vehicle_type_code_3.push_back(record.vehicle_type_code_3);
-            vehicle_type_code_4.push_back(record.vehicle_type_code_4);
-            vehicle_type_code_5.push_back(record.vehicle_type_code_5);
-            vehicle_type_code_6.push_back(record.vehicle_type_code_6);
+            local_crash_time.push_back(record.crash_time);
+            local_borough.push_back(record.borough);
+            local_zip_code.push_back(record.zip_code);
+            local_locations.push_back(record.location);
+            local_on_street_name.push_back(record.on_street_name);
+            local_cross_street_name.push_back(record.cross_street_name);
+            local_off_street_name.push_back(record.off_street_name);
+            local_contributing_factor_vehicle_1.push_back(record.contributing_factor_vehicle_1);
+            local_contributing_factor_vehicle_2.push_back(record.contributing_factor_vehicle_2);
+            local_contributing_factor_vehicle_3.push_back(record.contributing_factor_vehicle_3);
+            local_contributing_factor_vehicle_4.push_back(record.contributing_factor_vehicle_4);
+            local_contributing_factor_vehicle_5.push_back(record.contributing_factor_vehicle_5);
+            local_collision_ids.push_back(record.collision_id);
+            local_vehicle_type_code_1.push_back(record.vehicle_type_code_1);
+            local_vehicle_type_code_2.push_back(record.vehicle_type_code_2);
+            local_vehicle_type_code_3.push_back(record.vehicle_type_code_3);
+            local_vehicle_type_code_4.push_back(record.vehicle_type_code_4);
+            local_vehicle_type_code_5.push_back(record.vehicle_type_code_5);
+            local_vehicle_type_code_6.push_back(record.vehicle_type_code_6);
+
         }
     }
 
@@ -168,6 +209,26 @@ void ProcessorUsingThreadLocalBuffer::processLinesParallel(const std::vector<std
         persons_injured.insert(persons_injured.end(), persons_injured_local[i].begin(), persons_injured_local[i].end());
         latitudes.insert(latitudes.end(), latitudes_local[i].begin(), latitudes_local[i].end());
         longitudes.insert(longitudes.end(), longitudes_local[i].begin(), longitudes_local[i].end());
+        crash_time.insert(crash_time.end(), crash_time_local[i].begin(), crash_time_local[i].end());
+        borough.insert(borough.end(), borough_local[i].begin(), borough_local[i].end());
+        zip_code.insert(zip_code.end(), zip_code_local[i].begin(), zip_code_local[i].end());
+        locations.insert(locations.end(), locations_local[i].begin(), locations_local[i].end());
+        on_street_name.insert(on_street_name.end(), on_street_name_local[i].begin(), on_street_name_local[i].end());
+        cross_street_name.insert(cross_street_name.end(), cross_street_name_local[i].begin(), cross_street_name_local[i].end());
+        off_street_name.insert(off_street_name.end(), off_street_name_local[i].begin(), off_street_name_local[i].end());
+        contributing_factor_vehicle_1.insert(contributing_factor_vehicle_1.end(), contributing_factor_vehicle_1_local[i].begin(), contributing_factor_vehicle_1_local[i].end());
+        contributing_factor_vehicle_2.insert(contributing_factor_vehicle_2.end(), contributing_factor_vehicle_2_local[i].begin(), contributing_factor_vehicle_2_local[i].end());
+        contributing_factor_vehicle_3.insert(contributing_factor_vehicle_3.end(), contributing_factor_vehicle_3_local[i].begin(), contributing_factor_vehicle_3_local[i].end());
+        contributing_factor_vehicle_4.insert(contributing_factor_vehicle_4.end(), contributing_factor_vehicle_4_local[i].begin(), contributing_factor_vehicle_4_local[i].end());
+        contributing_factor_vehicle_5.insert(contributing_factor_vehicle_5.end(), contributing_factor_vehicle_5_local[i].begin(), contributing_factor_vehicle_5_local[i].end());
+        collision_ids.insert(collision_ids.end(), collision_ids_local[i].begin(), collision_ids_local[i].end());
+        vehicle_type_code_1.insert(vehicle_type_code_1.end(), vehicle_type_code_1_local[i].begin(), vehicle_type_code_1_local[i].end());
+        vehicle_type_code_2.insert(vehicle_type_code_2.end(), vehicle_type_code_2_local[i].begin(), vehicle_type_code_2_local[i].end());
+        vehicle_type_code_3.insert(vehicle_type_code_3.end(), vehicle_type_code_3_local[i].begin(), vehicle_type_code_3_local[i].end());
+        vehicle_type_code_4.insert(vehicle_type_code_4.end(), vehicle_type_code_4_local[i].begin(), vehicle_type_code_4_local[i].end());
+        vehicle_type_code_5.insert(vehicle_type_code_5.end(), vehicle_type_code_5_local[i].begin(), vehicle_type_code_5_local[i].end());
+        vehicle_type_code_6.insert(vehicle_type_code_6.end(), vehicle_type_code_6_local[i].begin(), vehicle_type_code_6_local[i].end());
+
     }
 }
 
